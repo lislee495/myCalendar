@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  accepts_nested_attributes_for :events, :friendships
 
   def upcoming_events
 

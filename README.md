@@ -23,4 +23,6 @@ Things you may want to cover:
 
 * Credits to:
   * https://github.com/Nerian/bootstrap-datepicker-rails for the date/time picker
-  * http://railscasts.com/episodes/163-self-referential-association?view=asciicast for Friendship associations, self-referential joins 
+  * http://railscasts.com/episodes/163-self-referential-association?view=asciicast for Friendship associations, self-referential joins
+  * https://launchschool.com/blog/integrating-rails-and-bootstrap-part-2 for Bootstrap integration
+  
