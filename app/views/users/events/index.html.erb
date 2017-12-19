@@ -1,0 +1,5 @@
+<h1>All of Your Events</h1>
+
+<% @events.all.each do |event|%>
+<li><%=event.short_description%></li>
+<% end %>

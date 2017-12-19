@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users do
+  namespace :user do
     resources :events
     resources :friendships
   end
