@@ -15,6 +15,6 @@
     <% end %>
   </datalist>
 <%= f.label :user, "Add Friends" %>
-<%= f.collection_select :user, User.all, :id, :name %>
+<%= f.collection_select :user, User.all, :id, :username %>
 <%= t.submit %>
 <% end %>
