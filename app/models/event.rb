@@ -3,9 +3,11 @@ class Event < ActiveRecord::Base
   belongs_to :owner, class: "User", foreign_key: "owner_id"
   has_many :categories, through: :event_categories
   has_many :event_categories
+  validates :short_description, presence: true, length: {maximum: 140}
   validates :category, presence: true
   validates :date, presence: true
   validates :time, presence: true
+  validates :additional_info, length: {maximum: 280}
 
 
 
