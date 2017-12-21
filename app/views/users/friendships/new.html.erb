@@ -1,11 +1,17 @@
-<!-- <%= form_tag(user_friendships_path) do %>
-<%= label_tag "Add a Friend" %>
-<%= text_field_tag
-
-
-list: "categories_autocomplete" %>
-  <datalist id="categories_autocomplete">
-    <% Category.all.each do |category| %>
-      <option value="<%= category.name %>">
+<%= form_for(@friendship) do |f| %>
+<%= f.label :username, "Their Username:"%>
+<%= f.text_field :username, list: "username_autocomplete" %>
+  <datalist id="username_autocomplete">
+    <% User.all.each do |user| %>
+      <option value="<%= user.username %>">
     <% end %>
-  </datalist> -->
+  </datalist>
+<%= f.label :email, "Or Their Email:" %>
+<%= f.text_field :email, list: "email_autocomplete" %>
+  <datalist id="email_autocomplete">
+    <% User.all.each do |user| %>
+      <option value="<%= user.email %>">
+    <% end %>
+  </datalist>
+<%= f.submit "Add Friend"%>
+<% end %>
