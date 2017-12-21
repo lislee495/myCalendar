@@ -26,10 +26,10 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
+gem "simple_calendar", "~> 2.0"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
