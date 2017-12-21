@@ -1,0 +1,9 @@
+<%= week_calendar events: @events do |date, events| %>
+  <%= date %>
+
+  <% events.each do |event| %>
+    <div>
+      <%= event.short_description %>
+    </div>
+  <% end %>
+<% end %>

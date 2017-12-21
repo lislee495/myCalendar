@@ -21,4 +21,6 @@ class Event < ActiveRecord::Base
     self.upcoming_events.limit(1)
   end
 
+
+
 end

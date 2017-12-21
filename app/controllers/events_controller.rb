@@ -43,7 +43,16 @@ class User::EventsController < ApplicationController
     redirect_to user_events_path
   end
 
+  def month
+    @events = Event.all
+  end
+
+  def week
+    @events = Event.all
+  end
+
   private
+  
   def set_event
     @event = Event.find(params[:id])
   end
@@ -51,4 +60,5 @@ class User::EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:short_description, :date, :time, :additional_info, :user_id, :category_id)
   end
+
 end
