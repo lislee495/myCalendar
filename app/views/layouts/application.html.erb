@@ -7,19 +7,54 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/user/today">Today<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user/week">Week<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user/month">Month<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user/events/new">New Event<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user/events/">All Events<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/sign_out">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
   <body>
     <div id="main-container" class="container-fluid">
       <div class="row">
         <div class="col-md-3">
           <h3>Next Event:</h3>
-
+          <%= Event.next_upcoming_event.short_description%>
           <h3>Upcoming Events:</h3>
+          <ol>
+          <% Event.upcoming_events(5).each do |event|%>
+          <li><%=event.short_description%></li>
+          <% end%>
+        </ol>
         </div>
         <div class="col-md-6">
           <%= yield %>
         </div>
         <div class="col-md-3">
           <h3>Your Friends:</h3>
+
         </div>
       </div>
     </div>
