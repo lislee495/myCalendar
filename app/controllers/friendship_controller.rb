@@ -20,21 +20,18 @@ class User::FriendshipController < ApplicationController
   end
 
   def destroy
-    @friendship.find_by(user_id: current_user.id, friend_id: User.find_by(username: friend_params[:username]))
+    @friendship = current_user.friendships.find_by(friend_id: User.find_by(username: friend_params[:username]))
     @friendship.delete
     redirect_to root_url
   end
 
   private
-  def friend_params
-    params.require(:user).permit(:email, :username)
-  end
 
   def find_friend
-    if friend_params[:username]
-      user = User.find_by(username: friend_param[:username])
+    if params[:username]
+      user = User.find_by(username: params[:username])
     else
-      user = User.find_by(username: friend_param[:email])
+      user = User.find_by(username: params[:email])
     end
     user
   end
