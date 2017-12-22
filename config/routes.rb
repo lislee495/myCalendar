@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "/user/month", to: "user/events#month"
   get "/user/week", to: "user/events#week"
   get "/user/today", to: "user/events#today"
-  root :to => 'application#welcome'
+  root :to => 'user/events#today'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

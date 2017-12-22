@@ -9,8 +9,12 @@ class Event < ActiveRecord::Base
   validates :time, presence: true
   validates :additional_info, length: {maximum: 280}
 
-  def self.upcoming_events(num)
-    where("created_at >=?", Time.zone.today.beginning_of_day).order(date: :desc).limit(num)
+  def self.upcoming_events(num = nil)
+    if num
+      where("created_at >=?", Time.zone.today.beginning_of_day).order(date: :desc).limit(num)
+    else
+      where("created_at >=?", Time.zone.today.beginning_of_day).order(date: :desc)
+    end
   end
 
   def self.previous_events
@@ -20,7 +24,4 @@ class Event < ActiveRecord::Base
   def self.next_upcoming_event
     self.upcoming_events.limit(1)
   end
-
-
-
 end

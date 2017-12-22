@@ -1,3 +1,13 @@
-<h1>Edit an Event</h1>
+<h1>Event</h1>
 
-<%= render 'form' %>
+<%=@event.short_description %>
+<%=@event.time %>
+<%=@event.date%>
+<%=@event.category%>
+<%=@event.additional_info%>
+<%=@event.users%>
+
+<% if @event.owner == current_user%>
+<%=link_to "Edit", edit_user_event_path(@event)%>
+<%=link_to "Edit", delete_user_event_path(@event), method: "delete", data: {confirm: "Are you sure?"}%>
+<% end %>
