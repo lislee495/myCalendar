@@ -1,5 +1,17 @@
-class User::EventsController < ApplicationController
+class User::EventController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  def month
+    @events = Event.all
+  end
+
+  def week
+    @events = Event.all
+  end
+
+  def today
+    @events = Event.all
+  end
+  
   def new
     @event = Event.new
   end
@@ -43,13 +55,7 @@ class User::EventsController < ApplicationController
     redirect_to user_events_path
   end
 
-  def month
-    @events = Event.all
-  end
 
-  def week
-    @events = Event.all
-  end
 
   private
 

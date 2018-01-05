@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
   namespace :user do
-    resources :events
-    resources :friendships
+    resources :event
+    resources :friendship
   end
-  get "/user/month", to: "user/events#month"
-  get "/user/week", to: "user/events#week"
-  get "/user/today", to: "user/events#today"
-  root :to => 'user/events#today'
+  authenticated :user do
+    root to: 'user/event#new', as: :authenticated_root
+  end
+  get "/user/month", to: "user/event#month"
+  get "/user/week", to: "user/event#week"
+  get "/user/today", to: "user/event#today"
+  devise_scope :user do
+    root to: "user/event#new"
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

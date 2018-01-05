@@ -1,4 +1,4 @@
-<%= form_for(@event) do |f| %>
+<%= form_for :event do |f| %>
 <%= f.label :short_description %>
 <%= f.text_field :short_description %>
 <%= f.label :date %>
@@ -7,14 +7,14 @@
 <%= f.time_field :time %>
 <%= f.label :additional_info %>
 <%= f.text_field :additional_info %>
-<%= f.label :category %>
-<%= f.text_field :category, list: "categories_autocomplete" %>
+<%= f.label :category_ids %>
+<%= f.text_field :category_ids, list: "categories_autocomplete" %>
   <datalist id="categories_autocomplete">
     <% Category.all.each do |category| %>
       <option value="<%= category.name %>">
     <% end %>
   </datalist>
-<%= f.label :user, "Add Friends" %>
-<%= f.collection_select :user, User.all, :id, :username %>
-<%= t.submit %>
+<%= f.label :users, "Add Friends" %>
+<%= f.collection_select :users, User.all, :id, :username %>
+<%= f.submit %>
 <% end %>
