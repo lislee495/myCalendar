@@ -1,13 +1,18 @@
 <h1>Event</h1>
 
-<%=@event.short_description %>
-<%=@event.time %>
-<%=@event.date%>
-<%=@event.category%>
-<%=@event.additional_info%>
-<%=@event.users%>
+<ul>
+  <li><%=@event.short_description %></li>
+  <li>Time: <%=@event.time.strftime("%I:%M%p") %></li>
+  <li>Date: <%=@event.date.strftime("%B %e, %Y")%></li>
+  <li><%@event.categories.each do |category|%>
+  <%= category.name %>
+  <% end %></li>
+  <li>Additional Information: <%=@event.additional_info%></li>
+</ul>
+
+
+
 
 <% if @event.owner == current_user%>
 <%=link_to "Edit", edit_user_event_path(@event)%>
-<%=link_to "Edit", delete_user_event_path(@event), method: "delete", data: {confirm: "Are you sure?"}%>
 <% end %>
