@@ -1,3 +1,8 @@
-<h1>Add Friend</h1>
+<h2>Your Friends</h2>
 
-<h3>Find a friend:</h3>
+<ul>
+  <%=current_user.friendships.each do |friend|%>
+  <% user = User.find_by(id: friend.friend_id) %>
+  <li><%=user.email%></li>
+  <%end %>
+</ul>

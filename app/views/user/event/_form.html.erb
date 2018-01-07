@@ -1,16 +1,16 @@
 
-<%= f.label :short_description %>
-<%= f.text_field :short_description %>
-<%= f.label :date %>
-<%= f.date_field :date%>
-<%= f.label :time %>
-<%= f.time_field :time %>
-<%= f.label :additional_info %>
-<%= f.text_field :additional_info %>
-<%= f.label :categories_attributes, 'Category'%>
+<%= f.label :short_description %> :
+<%= f.text_field :short_description %> <br>
+<%= f.label :date %> :
+<%= f.date_field :date%> <br>
+<%= f.label :time %> :
+<%= f.time_field :time %> <br>
+<%= f.label :additional_info %> :
+<%= f.text_field :additional_info %> <br>
+<%= f.label :categories_attributes, 'Category'%> :
 <%= f.fields_for :categories_attributes, @event.categories.build do |categories_fields| %>
 <%= categories_fields.text_field :name%>
-  <%end%>
-<%= f.label :user_ids, "Add Friends" %>
-<%= f.collection_select :user_ids, User.all, :id, :email %>
+  <%end%> <br>
+<%= f.label :user_ids, "Add Your Friends" %> :
+<%= f.collection_select :user_ids, current_user.friends.all, :id, :email, :include_blank => true%> <br>
 <%= f.submit %>

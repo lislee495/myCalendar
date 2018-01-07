@@ -1,4 +1,5 @@
 class User::EventController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   def month
     @events = Event.all
@@ -21,8 +22,10 @@ class User::EventController < ApplicationController
     @event.owner = current_user
     if @event.save
       current_user.events << @event
-      user = User.find_by(id: event_params[:user_ids])
-      user.events << @event
+      if event_params[:user_ids] != ""
+        user = User.find_by(id: event_params[:user_ids])
+        user.events << @event
+      end
       redirect_to user_event_path(@event)
     else
       render :new
@@ -69,4 +72,5 @@ class User::EventController < ApplicationController
   def event_params
     params.require(:event).permit(:short_description, :date, :time, :additional_info, :user_ids, :categories_attributes => [:name])
   end
+
 end

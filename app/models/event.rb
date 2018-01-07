@@ -16,6 +16,12 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def is_shared?
+    if self.users
+      return true
+    end
+  end
+
   def self.upcoming_events(num = nil)
     if num
       where("created_at >=?", Time.zone.today.beginning_of_day).order(date: :desc).limit(num)
