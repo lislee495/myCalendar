@@ -20,8 +20,9 @@ class User::EventController < ApplicationController
     @event = Event.new(event_params)
     @event.owner = current_user
     if @event.save
-      category = Category.find_or_create_by(name: event_params["categories"]["name"])
-      category.events << @event
+      current_user.events << @event
+      user = User.find_by(id: event_params[:user_ids])
+      user.events << @event
       redirect_to user_event_path(@event)
     else
       render :new
@@ -66,6 +67,6 @@ class User::EventController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:short_description, :date, :time, :additional_info, :categories => :name)
+    params.require(:event).permit(:short_description, :date, :time, :additional_info, :user_ids, :categories_attributes => [:name])
   end
 end

@@ -1,5 +1,5 @@
 <h1>All of Your Events</h1>
-
+<% if current_user.events%>
 <h2>Your Upcoming Events</h2>
 <ol>
   <% @events.upcoming_events.each do |event|%>
@@ -13,3 +13,7 @@
   <li><%=event.short_description%> - <%=link_to "Show", user_event_path(event)%></li>
   <% end %>
 </ol>
+<% else %>
+<h2>No events to show!</h2>
+<h3>Make a <%link_to "new event!", new_user_event_path%></h3>
+<% end %>

@@ -5,7 +5,7 @@ class User::FriendshipController < ApplicationController
 
   def create
     if find_friend
-      @friendship = current_user.friendships.build(friend_id: user.id)
+      @friendship = current_user.friendships.build(friend_id: friend_params[:user_id])
       if @friendship.save
         flash[:notice] = "Added friend."
         redirect_to root_url
@@ -20,7 +20,7 @@ class User::FriendshipController < ApplicationController
   end
 
   def destroy
-    @friendship = current_user.friendships.find_by(friend_id: User.find_by(username: friend_params[:username]))
+    @friendship = current_user.friendships.find_by(friend_id: friend_params[:user_id])
     @friendship.delete
     redirect_to root_url
   end
@@ -28,11 +28,11 @@ class User::FriendshipController < ApplicationController
   private
 
   def find_friend
-    if params[:username]
-      user = User.find_by(username: params[:username])
-    else
-      user = User.find_by(username: params[:email])
-    end
+    user = User.find_by(id: friend_params[:user_id])
     user
+  end
+
+  def friend_params
+    params.require(:friendship).permit(:user_id)
   end
 end

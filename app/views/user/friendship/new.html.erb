@@ -1,0 +1,5 @@
+<%= form_for :friendship, :url => { :action => "create" } do |f| %>
+<%= f.label :email, "Find Using Their Email:" %>
+<%= f.collection_select :user_id, User.all, :id, :email%>
+<%= f.submit "Add Friend"%>
+<% end %>

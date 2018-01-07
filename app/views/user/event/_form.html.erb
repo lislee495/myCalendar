@@ -7,15 +7,10 @@
 <%= f.time_field :time %>
 <%= f.label :additional_info %>
 <%= f.text_field :additional_info %>
-<%= f.label :categories, 'Category'%>
-<%= f.fields_for :categories, @event.categories.build do |categories_fields| %>
-<%= categories_fields.text_field :name,  list: "categories_autocomplete" %>
-  <datalist id="categories_autocomplete">
-    <% Category.all.each do |category| %>
-      <option value="<%= category.name %>">
-    <% end %>
-  </datalist>
+<%= f.label :categories_attributes, 'Category'%>
+<%= f.fields_for :categories_attributes, @event.categories.build do |categories_fields| %>
+<%= categories_fields.text_field :name%>
   <%end%>
-<%= f.label :user_id, "Add Friends" %>
-<%= f.collection_select :user_id, User.all, :id, :email %>
+<%= f.label :user_ids, "Add Friends" %>
+<%= f.collection_select :user_ids, User.all, :id, :email %>
 <%= f.submit %>

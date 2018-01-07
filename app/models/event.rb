@@ -9,6 +9,13 @@ class Event < ActiveRecord::Base
   validates :time, presence: true
   validates :additional_info, length: {maximum: 280}
 
+  def categories_attributes=(category_attributes)
+    category_attributes.values.each do |category_attribute|
+      category = Category.find_or_create_by(name: category_attribute)
+      self.categories << category
+    end
+  end
+
   def self.upcoming_events(num = nil)
     if num
       where("created_at >=?", Time.zone.today.beginning_of_day).order(date: :desc).limit(num)
