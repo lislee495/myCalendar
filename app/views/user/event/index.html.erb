@@ -1,18 +1,24 @@
 <h1>All of Your Events</h1>
+<hr>
 <% if current_user.events%>
+  <h2>Your Next Event</h2>
+  <ul>
+    <li><%=next_event.short_description%> - <%=link_to "Show", user_event_path(next_event)%></li>
+  </ul>
+  <br>
 <h2>Your Upcoming Events</h2>
-<ol>
-  <% @events.upcoming_events.each do |event|%>
+<ul>
+  <% upcoming.each do |event|%>
   <li><%=event.short_description%> - <%=link_to "Show", user_event_path(event)%></li>
   <% end %>
-</ol>
-
+</ul>
+  <br>
 <h2>Your Previous Events</h2>
-<ol>
-  <% @events.previous_events.each do |event|%>
+<ul>
+  <% previous.each do |event|%>
   <li><%=event.short_description%> - <%=link_to "Show", user_event_path(event)%></li>
   <% end %>
-</ol>
+</ul>
 <% else %>
 <h2>No events to show!</h2>
 <h3>Make a <%link_to "new event!", new_user_event_path%></h3>

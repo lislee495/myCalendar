@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
-  has_many :users
+  has_many :event_users
+  has_many :users, through: :event_users
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
   has_many :event_categories
   has_many :categories, through: :event_categories
@@ -15,26 +16,22 @@ class Event < ActiveRecord::Base
       self.categories << category
     end
   end
+  #
+  # def upcoming_events(num = nil)
+  #   if num
+  #     where("date >=? AND owner_id =?", Time.zone.today.beginning_of_day).order(date: :asc).limit(num)
+  #   else
+  #     where("date >=? AND users =?", Time.zone.today.beginning_of_day, 2).order(date: :asc)
+  #   end
+  # end
+  #
+  #
+  # def self.previous_events
+  #   where("date <?", Time.zone.today.beginning_of_day).order(date: :desc).limit(5)
+  # end
+  #
+  # def self.next_upcoming_event
+  #   self.upcoming_events.limit(1)
+  # end
 
-  def is_shared?
-    if self.users
-      return true
-    end
-  end
-
-  def self.upcoming_events(num = nil)
-    if num
-      where("created_at >=?", Time.zone.today.beginning_of_day).order(date: :desc).limit(num)
-    else
-      where("created_at >=?", Time.zone.today.beginning_of_day).order(date: :desc)
-    end
-  end
-
-  def self.previous_events
-    where("created_at <?", Time.zone.today.beginning_of_day)
-  end
-
-  def self.next_upcoming_event
-    self.upcoming_events.limit(1)
-  end
 end

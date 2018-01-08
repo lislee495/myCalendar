@@ -27,11 +27,12 @@
         <a class="nav-link dropdown-toggle" href="/user/event/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Events
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/user/event/new">New Event</a>
-        </div>
+
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="/user/event">All Events</a>
+        </div>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/user/event/new">New Event</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -52,8 +53,17 @@
 <div id="main-container" class="container-fluid">
 <div class="row">
 <div class="col-md-3">
-
-</ol>
+  <h5>Next Event:</h5>
+    <ul>
+      <li><%=link_to next_event.short_description, user_event_path(next_event)%> - <%=next_event.date.strftime("%B %e, %Y")%></li></li>
+    </ul>
+    <br>
+  <h5>Upcoming Events:</h5>
+    <ul>
+    <% upcoming.each do |event|%>
+    <li><%=link_to event.short_description, user_event_path(event)%> - <%=event.date.strftime("%B %e, %Y")%></li>
+    <% end%>
+  </ul>
 </div>
 <div class="col-md-6">
 <%= yield %>

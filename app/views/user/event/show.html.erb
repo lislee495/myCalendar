@@ -1,13 +1,18 @@
 <h1>Event</h1>
 
 <ul>
-  <li><%=@event.short_description %></li>
+  <li>Short Description: <%=@event.short_description %></li>
   <li>Time: <%=@event.time.strftime("%I:%M%p") %></li>
   <li>Date: <%=@event.date.strftime("%B %e, %Y")%></li>
-  <li><%@event.categories.each do |category|%>
+  <li>Categories: <%@event.categories.each do |category|%>
   <%= category.name %>
   <% end %></li>
   <li>Additional Information: <%=@event.additional_info%></li>
+  <li>Created by: <%=@event.owner.email%></li>
+  <% if !@event.users.select {|user| user.email != @event.owner.email}.empty?%>
+  <li>Shared with: <%=@event.users.select {|user| user.email != @event.owner.email}%></li>
+  <% end %>
+
 </ul>
 
 

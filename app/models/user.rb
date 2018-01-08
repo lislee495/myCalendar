@@ -9,4 +9,6 @@ class User < ApplicationRecord
         :recoverable, :rememberable, :trackable,
         :validatable
   accepts_nested_attributes_for :events, :friendships
+
+
 end
