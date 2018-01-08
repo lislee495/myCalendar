@@ -3,15 +3,15 @@ class User::EventController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   helper EventHelper
   def month
-    @events = Event.all
+    @events = current_user.events.all
   end
 
   def week
-    @events = Event.all
+    @events = current_user.events.all
   end
 
   def today
-    @events = Event.all
+    @events = current_user.events.all
   end
 
   def new

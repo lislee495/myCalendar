@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220193032) do
+ActiveRecord::Schema.define(version: 20180108184835) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(version: 20171220193032) do
     t.text "short_description"
     t.integer "owner_id"
     t.date "date"
-    t.time "time"
     t.text "additional_info"
+    t.time "start_time"
+    t.time "end_time"
   end
 
   create_table "friendships", force: :cascade do |t|

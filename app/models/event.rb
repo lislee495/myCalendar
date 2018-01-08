@@ -7,7 +7,8 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :categories
   validates :short_description, presence: true, length: {maximum: 140}
   validates :date, presence: true
-  validates :time, presence: true
+  validates :start_time, presence: true
+  validates :end_time, presence: true
   validates :additional_info, length: {maximum: 280}
 
   def categories_attributes=(category_attributes)
