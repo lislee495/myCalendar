@@ -1,4 +1,4 @@
-<%= week_calendar(attribute: :starts_at) events: @events do |date, events| %>
+<%= week_calendar events: @events do |date, events| %>
   <%= date %>
 
   <% events.each do |event| %>

@@ -53,6 +53,7 @@
 <div id="main-container" class="container-fluid">
 <div class="row">
 <div class="col-md-3">
+  <% if any_events?%>
   <h5>Next Event:</h5>
     <ul>
       <li><%=link_to next_event.short_description, user_event_path(next_event)%> - <%=next_event.date.strftime("%B %e, %Y")%></li></li>
@@ -64,13 +65,15 @@
     <li><%=link_to event.short_description, user_event_path(event)%> - <%=event.date.strftime("%B %e, %Y")%></li>
     <% end%>
   </ul>
+  <%end %>
 </div>
 <div class="col-md-6">
 <%= yield %>
 </div>
 <div class="col-md-3 w3-gray">
-  <% if current_user%>
+
   <h5>Hello, <%=current_user.email%></h5>
+  <%if any_friends?%>
   <h3>Your Friends:</h3>
   <ul>
      <% current_user.friendships.each do |friend|%>
@@ -80,8 +83,9 @@
        <% end%>
      <%end %>
  </ul>
- <%end%>
+
  <h5><%=link_to "Add Friends", new_user_friendship_path%></h5>
+ <%end%>
 </div>
 </div>
 </div>

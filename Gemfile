@@ -30,6 +30,8 @@ gem 'autoprefixer-rails'
 gem "simple_calendar", "~> 2.0"
 gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'jquery-rails'
+gem 'omniauth-facebook'
+gem 'dotenv-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

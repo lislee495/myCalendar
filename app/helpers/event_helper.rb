@@ -1,17 +1,23 @@
 module EventHelper
   def upcoming
-    events = current_user.events.select {|event| event.date >= Time.zone.today.beginning_of_day}
-    events.sort_by &:date
+    if current_user
+      events = current_user.events.select {|event| event.date >= Time.zone.today.beginning_of_day}
+      events.sort_by &:date
+    end
 
   end
 
   def previous
-    events = current_user.events.select {|event| event.date < Time.zone.today.beginning_of_day}
-    events.sort_by &:date
+    if current_user
+      events = current_user.events.select {|event| event.date < Time.zone.today.beginning_of_day}
+      events.sort_by &:date
+    end
   end
 
   def next_event
-    upcoming[0]
+    if current_user
+      upcoming[0]
+    end
   end
 
   def start_date
@@ -20,6 +26,6 @@ module EventHelper
 
   def start_time
     :time
-  end 
+  end
 
 end
