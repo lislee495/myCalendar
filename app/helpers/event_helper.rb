@@ -20,12 +20,4 @@ module EventHelper
     end
   end
 
-  def start_date
-    :date
-  end
-
-  def start_time
-    :time
-  end
-
 end

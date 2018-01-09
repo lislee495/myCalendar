@@ -1,4 +1,5 @@
 class User::FriendshipController < ApplicationController
+  before_action :authenticate_user!
   def new
     @friendship = current_user.friendships.build
   end
