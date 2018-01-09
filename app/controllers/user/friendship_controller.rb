@@ -1,7 +1,12 @@
 class User::FriendshipController < ApplicationController
   before_action :authenticate_user!
+  helper FriendshipHelper
   def new
     @friendship = current_user.friendships.build
+  end
+
+  def index
+    
   end
 
   def create

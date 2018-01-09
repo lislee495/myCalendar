@@ -13,8 +13,12 @@ class Event < ActiveRecord::Base
 
   def categories_attributes=(category_attributes)
     category_attributes.values.each do |category_attribute|
-      category = Category.find_or_create_by(name: category_attribute)
-      self.categories << category
+      if category_attribute != ""
+        category = Category.find_or_create_by(name: category_attribute)
+        category.owner_id = current_user.id
+        category.save
+        self.categories << category
+      end
     end
   end
   #

@@ -11,9 +11,11 @@
   <li>Additional Information: <%=@event.additional_info%></li>
   <li>Created by: <%=@event.owner.email%></li>
   <% if !@event.users.select {|user| user.email != @event.owner.email}.empty?%>
-  <li>Shared with: <%=@event.users.select {|user| user.email != @event.owner.email}%></li>
+  <li>Shared with: <%=shared_with.each do |user|%>
+      <%=user.email%>
+      <%end%>
+    </li>
   <% end %>
-
 </ul>
 
 
@@ -21,5 +23,5 @@
 
 <% if @event.owner == current_user%>
 <%=link_to "Edit", edit_user_event_path(@event)%>
-<%=button_to "Delete", delete_user_event_path(@event), method: "delete", data: {confirm: "Are you sure?"}%>
+Share with more
 <% end %>

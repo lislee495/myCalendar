@@ -1,8 +1,22 @@
 <h2>Your Friends</h2>
 
 <ul>
+  <% if any_friends?%>
   <%=current_user.friendships.each do |friend|%>
   <% user = User.find_by(id: friend.friend_id) %>
   <li><%=user.email%></li>
-  <%end %>
+  <% end%>
+  <%else %>
+  None found! <%=link_to "Add Friends", new_user_friendship_path%>
+  <% end %>
+</ul>
+
+<br>
+<h2>Users Who Added You</h2>
+
+<ul>
+  <% not_added_back.each do |user|%>
+  <li><%=user.email %></li>
+  <% end %>
+
 </ul>

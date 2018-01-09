@@ -10,5 +10,4 @@ class User::CategoryController < ApplicationController
   end
 
 
-
 end

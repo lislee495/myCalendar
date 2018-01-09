@@ -20,4 +20,9 @@ module EventHelper
     end
   end
 
+  def shared_with
+    @event.users.select {|user| user.email != @event.owner.email}
+  end
+
+
 end

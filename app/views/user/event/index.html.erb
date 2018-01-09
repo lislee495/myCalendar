@@ -1,6 +1,6 @@
 <h1>All of Your Events</h1>
 <hr>
-<% if any_events%>
+<% if any_events?%>
   <h2>Your Next Event</h2>
   <ul>
     <li><%=next_event.short_description%> - <%=link_to "Show", user_event_path(next_event)%></li>
