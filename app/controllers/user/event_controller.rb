@@ -23,10 +23,6 @@ class User::EventController < ApplicationController
     @event.owner = current_user
     if @event.save
       current_user.events << @event
-      # if event_params[:user_ids] != ""
-      #   user = User.find_by(id: event_params[:user_ids])
-      #   user.events << @event
-      # end
       redirect_to user_event_path(@event)
     else
       render :new

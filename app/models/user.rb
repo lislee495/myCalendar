@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   has_many :event_users
   has_many :events, through: :event_users
+  has_many :categories
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable,
         :validatable, :omniauthable, omniauth_providers: %i[facebook]
@@ -18,7 +19,7 @@ class User < ApplicationRecord
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
-    end 
+    end
   end
 
   def self.new_with_session(params, session)
