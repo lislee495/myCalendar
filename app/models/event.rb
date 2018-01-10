@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
     category_attributes.values.each do |category_attribute|
       if category_attribute != ""
         category = Category.find_or_create_by(name: category_attribute)
-        category.owner_id = current_user.id
+        # category.owner_id = current_user.id
         category.save
         self.categories << category
       end

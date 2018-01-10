@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'calendar/show'
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   namespace :user do
     resources :event
@@ -8,9 +10,10 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: 'user/event#new', as: :authenticated_root
   end
-  get "/user/month", to: "user/event#month"
-  get "/user/week", to: "user/event#week"
-  get "/user/today", to: "user/event#today"
+
+  get "/user/calendar/month", to: "user/calendar#month"
+  get "/user/calendar/week", to: "user/calendar#week"
+  get "/user/calendar/today", to: "user/calendar#today"
   devise_scope :user do
     root to: "user/event#new"
   end

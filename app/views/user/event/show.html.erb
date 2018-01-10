@@ -23,6 +23,6 @@
 
 <% if @event.owner == current_user%>
 <%=link_to "Edit", edit_user_event_path(@event)%>
-<%=button_to "Delete", @event, method: :delete, data: {confirm: "Are you sure?"}%>
+<%=button_to "Delete", user_event_path, method: :delete, data: {confirm: "Are you sure?"}%>
 Share with more
 <% end %>
