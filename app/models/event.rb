@@ -4,22 +4,17 @@ class Event < ActiveRecord::Base
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
   has_many :event_categories
   has_many :categories, through: :event_categories
-  accepts_nested_attributes_for :categories
+  accepts_nested_attributes_for :categories, reject_if: proc { |attributes| attributes['name'].blank? }
   validates :short_description, presence: true, length: {maximum: 140}
   validates :date, presence: true
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :additional_info, length: {maximum: 280}
 
+
   def categories_attributes=(category_attributes)
-    category_attributes.values.each do |category_attribute|
-      if category_attribute != ""
-        category = Category.find_or_create_by(name: category_attribute)
-        # category.owner_id = current_user.id
-        category.save
-        self.categories << category
-      end
-    end
+    category = Category.find_or_create_by!(name: category_attributes[:name], owner_id: category_attributes[:owner_id])
+    self.categories << category
   end
   #
   # def upcoming_events(num = nil)

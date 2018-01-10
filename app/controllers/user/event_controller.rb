@@ -2,17 +2,6 @@ class User::EventController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   helper EventHelper
-  def month
-    @events = current_user.events.all
-  end
-
-  def week
-    @events = current_user.events.all
-  end
-
-  def today
-    @events = current_user.events.all
-  end
 
   def new
     @event = Event.new
@@ -55,7 +44,7 @@ class User::EventController < ApplicationController
   def destroy
     @event.destroy
     flash[:notice] = "Event deleted"
-    redirect_to user_events_path
+    redirect_to user_event_path
   end
 
   private

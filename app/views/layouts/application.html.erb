@@ -43,6 +43,7 @@
           <a class="dropdown-item" href="/user/friendship">All Friends</a>
         </div>
       </li>
+
       <li class="nav-item">
     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link")%>
       </li>
@@ -80,7 +81,7 @@
      <% current_user.friendships.each do |friend|%>
        <% user = User.find_by(id: friend.friend_id) %>
        <% if user %>
-       <li><%=user.email%> <%=button_to "Delete", user_friendship_path(user.id), method: :delete, data: { confirm: 'Are you sure?' }%></li>
+       <li><%=user.email%> <%=button_to "Delete", user_friendship_path(friend.id, friendship: {user_id: user.id}), method: :delete, data: { confirm: 'Are you sure?' }%></li>
        <% end%>
      <%end %>
  </ul>

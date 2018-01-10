@@ -6,7 +6,7 @@ class User::FriendshipController < ApplicationController
   end
 
   def index
-    
+
   end
 
   def create

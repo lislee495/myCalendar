@@ -12,6 +12,7 @@
 <%= f.label :categories_attributes, 'Category'%> :
 <%= f.fields_for :categories_attributes, @event.categories.build do |categories_fields| %>
 <%= categories_fields.text_field :name%>
+<%= categories_fields.hidden_field(:owner_id, value: current_user.id)%>
   <%end%> <br>
 <%= f.label :user_ids, "Add Your Friends" %> :
 <%= f.collection_select :user_ids, current_user.friends.all, :id, :email, :include_blank => true%> <br>

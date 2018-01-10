@@ -10,7 +10,7 @@
 <ul>
   <% not_added_back.each do |user|%>
   <li><%=user.email %></li>
-      <%= button_to('Add', user_friendship_path, { controller: "friendship", action: "create", user_id: user.id }, method: :post )%>
+      <%= button_to('Add', { controller: "friendship", action: :create, friendship: {user_id: user.id} }, method: :post )%>
   <% end %>
 
 </ul>
