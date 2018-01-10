@@ -2,8 +2,8 @@
 
 <ul>
   <li>Short Description: <%=@event.short_description %></li>
-  <li>Starts at: <%=@event.start_time.strftime("%I:%M%p") %></li>
-  <li>Ends at: <%=@event.end_time.strftime("%I:%M%p") %></li>
+  <li>Starts at: <%=@event.start_time.strftime("%l:%M%p") %></li>
+  <li>Ends at: <%=@event.end_time.strftime("%l:%M%p") %></li>
   <li>Date: <%=@event.date.strftime("%B %e, %Y")%></li>
   <li>Categories: <%@event.categories.each do |category|%>
   <%= category.name %>

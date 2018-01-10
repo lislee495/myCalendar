@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="text-center">
+    <div class="well controls">
+      <%= link_to "Previous", user_calendar_week_path(date: @date - 1.week), class: "btn btn-default"%>
+      <%= "#{@date.beginning_of_week.strftime("%b %-d, %Y")} - #{@date.end_of_week.strftime("%b %-d, %Y")}" %>
+      <%= link_to "Next", user_calendar_week_path(date: @date + 1.week), class: "btn btn-default"%>
+
+    </div>
+  </div>
+</div>
+<div class="row">
+    <%= week_calendar @date do |date| %>
+      <%= date.day %>
+      <% if @events_by_date[date] %>
+    <ul>
+      <% @events_by_date[date].each do |event| %>
+        <%= link_to event.short_description, user_event_path(event) %>
+
+      <% end %>
+    </ul>
+  <% end %>
+    <% end %>
+</div>

@@ -9,9 +9,6 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <%= calendar @date do |date| %>
-      <%= date.day %>
-      <% if @events_by_date[date] %>
     <ul>
       <% @events_by_date[date].each do |event| %>
         <%= link_to event.short_description, user_event_path(event) %>
