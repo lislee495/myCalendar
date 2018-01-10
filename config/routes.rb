@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get "/user/calendar/month", to: "user/calendar#month"
   get "/user/calendar/week", to: "user/calendar#week"
-  get "/user/calendar/today", to: "user/calendar#today"
+  get "/user/calendar/day", to: "user/calendar#day"
   devise_scope :user do
     root to: "user/event#new"
   end

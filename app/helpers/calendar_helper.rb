@@ -8,6 +8,6 @@ module CalendarHelper
   end
 
   def day_calendar(date = Date.today, &block)
-    Calendar.new(self, date, block).week_table
+    Calendar.new(self, date, block).day_table
   end
 end
