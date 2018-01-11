@@ -47,6 +47,13 @@ class User::EventController < ApplicationController
     redirect_to user_event_path
   end
 
+  def unshare
+    @user_event = EventUser.find_by(user_id: params[:event][:user_ids])
+    @event = Event.find(@user_event.event_id)
+    @user_event.delete
+    redirect_to user_event_path(@event)
+  end
+
   private
 
   def set_event

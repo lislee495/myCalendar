@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12 text-center">
     <div class="well controls">
-      <%= link_to "Previous", user_calendar_day_path(date: @date + 1.day), class: "btn btn-default"%>
+      <%= link_to "Previous", user_calendar_day_path(date: @date - 1.day), class: "btn btn-default"%>
       <%= "#{@date.strftime("%b %-d, %Y")}" %>
       <%= link_to "Next", user_calendar_day_path(date: @date + 1.day), class: "btn btn-default"%>
     </div>
@@ -9,17 +9,16 @@
 </div>
 <div class="row">
     <%= day_calendar @date do |hours| %>
-    <%if hours != " "%>
+    <%if hours > 24%>
     <%=Time.at(hours).strftime("%l:%M %P")%>
-    <% end %>
+    <%end%>
+    <%if @events_by_date[@date]%>
+       <%@events_by_date[@date].each do |event| %>
+      <% if hours == event.start_time.strftime("%l").to_i  %>
+        <%=link_to event.short_description, user_event_path(event)%> <%=event.start_time.strftime("%l:%M %P")%> — <%=event.end_time.strftime("%l:%M %P")%>
+      <% end  %>
+     <%end %>
+   <%end %>
 
-      <!-- <% if @events_by_date[@date] %>
-    <ul>
-      <% @events_by_date[@date].each do |event| %>
-        <%= link_to event.short_description, user_event_path(event) %>
-
-      <% end %>
-    </ul>
-  <% end %> -->
-    <% end %>
+<%end%>
 </div>

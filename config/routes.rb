@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/user/calendar/month", to: "user/calendar#month"
   get "/user/calendar/week", to: "user/calendar#week"
   get "/user/calendar/day", to: "user/calendar#day"
+  post "/user/event/unshare", to: "user/event#unshare"
   post "/user/friendship/create", to: "user/friendship#create"
   devise_scope :user do
     root to: "user/event#new"

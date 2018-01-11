@@ -15,7 +15,7 @@ module EventHelper
   end
 
   def next_event
-    if current_user
+    if current_user && upcoming
       upcoming[0]
     end
   end
@@ -23,6 +23,11 @@ module EventHelper
   def shared_with
     @event.users.select {|user| user.email != @event.owner.email}
   end
+
+  def shared_with_me?
+    shared_with.include?(current_user) ? true : false
+  end
+
 
 
 end

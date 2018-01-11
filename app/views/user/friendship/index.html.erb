@@ -2,7 +2,7 @@
 
 <ul>
   <% if any_friends?%>
-  <%=current_user.friendships.each do |friend|%>
+  <%current_user.friendships.each do |friend|%>
   <% user = User.find_by(id: friend.friend_id) %>
   <li><%=user.email%></li>
   <% end%>

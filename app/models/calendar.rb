@@ -1,4 +1,5 @@
-class Calendar < Struct.new(:view, :date, :callback)
+
+class Calendar < Struct.new(:view, :date, :callback, :user)
   HEADER = %w[Sun Mon Tue Wed Thur Fri Sat]
   START_DAY = :sunday
 
@@ -30,6 +31,7 @@ class Calendar < Struct.new(:view, :date, :callback)
 
   def day_classes(day)
     classes = []
+    classes << make_day_class(day)
     classes << "today" if day == Date.today
     classes << "not-month" if day.month != date.month
     classes.empty? ? nil : classes.join(" ")
@@ -50,7 +52,7 @@ class Calendar < Struct.new(:view, :date, :callback)
 
   def day_rows
     content_tag :tr do
-      week.map { |day| content_tag :td, view.capture(day, &callback), class: week_day_classes(day) }.join.html_safe
+      week.map { |day| week_day_cell(day) }.join.html_safe
     end
   end
 
@@ -60,6 +62,7 @@ class Calendar < Struct.new(:view, :date, :callback)
 
   def week_day_classes(day)
     classes = []
+    classes << make_day_class(day)
     classes << "today" if day == Date.today
     classes << "not-week" if week_day(day) != week_day(date)
     classes.empty? ? nil : classes.join(" ")
@@ -77,12 +80,20 @@ class Calendar < Struct.new(:view, :date, :callback)
     (first..last).to_a.in_groups_of(7)
   end
 
+  def make_day_class(d)
+    @events_by_date = user.events.group_by(&:date)
+    if @events_by_date[d]
+        return "table-warning"
+    end
+  end
+
+
   #####################DAY###############################
   DAY_HEADER = %w[Time Events]
 
 
   def day_table
-    content_tag :table, class: "calendar table table-bordered table-striped" do
+    content_tag :table, class: "calendar table" do
       day_header + hour_rows
     end
   end
@@ -95,7 +106,7 @@ class Calendar < Struct.new(:view, :date, :callback)
 
   def hour_rows
     hours.map do |hour|
-      content_tag :tr do
+      content_tag :tr, class: make_class(hour[1]) do
         hour.map {|hr| hour_cell(hr)}.join.html_safe
       end
     end.join.html_safe
@@ -117,9 +128,21 @@ class Calendar < Struct.new(:view, :date, :callback)
     i = 0
     while i < 24
       new_array.push(array[i])
-      new_array.push(" ")
+      new_array.push(i)
       i+=1
     end
     new_array.in_groups_of(2)
   end
+
+  def make_class(hr)
+    @events_by_date = user.events.group_by(&:date)
+    if @events_by_date[date]
+       @events_by_date[date].each do |event|
+      if hr >= event.start_time.strftime("%l").to_i && hr <= event.start_time.strftime("%l").to_i
+        return "table-warning"
+      end
+    end
+  end
+ end
+
 end

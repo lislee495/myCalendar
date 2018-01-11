@@ -12,14 +12,18 @@
   <li>Created by: <%=@event.owner.email%></li>
   <% if !@event.users.select {|user| user.email != @event.owner.email}.empty?%>
   <li>Shared with: <%shared_with.each do |user|%>
-      <%=user.email%>
+      <%=user.email%> <% if @event.owner == current_user%>
+        <%=button_to "Unshare", user_event_unshare_path(event: {user_ids: user.id}), method: :post, data: { confirm: 'Are you sure?' }%>
+        <%end%>
       <%end%>
     </li>
   <% end %>
 </ul>
 
 
-
+<% if shared_with_me? %>
+<%=button_to "Unshare Myself", user_event_unshare_path(event: {user_ids: current_user.id}), method: :post, data: { confirm: 'Are you sure?' }%>
+<% end%>
 
 <% if @event.owner == current_user%>
 <%=link_to "Edit", edit_user_event_path(@event)%>

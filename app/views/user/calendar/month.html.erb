@@ -15,7 +15,6 @@
     <ul>
       <% @events_by_date[date].each do |event| %>
         <%= link_to event.short_description, user_event_path(event) %>
-
       <% end %>
     </ul>
   <% end %>
