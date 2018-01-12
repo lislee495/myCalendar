@@ -1,29 +1,21 @@
-# README
+# README for MY CAL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Description
+This site offers an intuitive, clean app for creating events, sharing them with friends, and viewing them on a calendar. First, users can sign up and quickly create an event. The app will organize the user's events by their relation to today's date and time, so it's easy to see the nearest events. The app also allows users to add other users as their friends, and see who's added them as a friend, so that person can be easily shared to an event. Once a user has been shared to an event, it'll appear in their upcoming events. Finally, the app offers dynamic calendars for day, week, and month views (using 's code as the basis), which will show and highlight the events that occur on each day and, in the case of the day calendar, each hour.
 
-Things you may want to cover:
+##Instruction
 
-* Ruby version
+Download and open the folder from https://github.com/snickers495/myCalendar
+```
+$ bundle install
+$ rails s
+```
+Open localhost:3000 on browser.
 
-* System dependencies
+##Credits
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* Credits to:
-  * https://github.com/Nerian/bootstrap-datepicker-rails for the date/time picker
+Credits to:
+  * https://richonrails.com/articles/building-a-basic-calendar-in-ruby-on-rails for the basis of my calendars: month, week, and day
   * http://railscasts.com/episodes/163-self-referential-association?view=asciicast for Friendship associations, self-referential joins
   * https://launchschool.com/blog/integrating-rails-and-bootstrap-part-2 for Bootstrap integration
-  * https://richonrails.com/articles/building-a-basic-calendar-in-ruby-on-rails https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
-  * https://github.com/excid3/simple_calendar
+  * https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
