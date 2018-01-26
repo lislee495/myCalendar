@@ -1,3 +1,35 @@
 // Place all the styles related to the Calendar controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table-text {
+  font-size: 12px;
+}
+
+.table {
+  width: 900px !important;
+  table-layout: fixed !important;
+}
+.week td {
+  height: 100px;
+  overflow: hidden;
+}
+.table-cal {
+  position: relative;
+  left: 30px;
+}
+.cal-header {
+  background-color: #4bb29d;
+  color: white !important;
+}
+.week-td {
+  height: 513px !important;
+}
+
+td:hover {
+  background-color: #f9f7f4;
+}
+
+.table-warning:hover {
+  background-color: #efc958 !important;
+}

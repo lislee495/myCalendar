@@ -5,4 +5,8 @@ class Friendship < ActiveRecord::Base
   def self.users_who_added(user)
     where("friend_id = ?", user.id)
   end
+
+  def self.all_except(user)
+  where.not(id: user)
+  end
 end

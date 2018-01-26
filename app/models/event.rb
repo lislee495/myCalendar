@@ -13,25 +13,12 @@ class Event < ActiveRecord::Base
 
 
   def categories_attributes=(category_attributes)
-    category = Category.find_or_create_by!(name: category_attributes[:name], owner_id: category_attributes[:owner_id])
-    self.categories << category
+    if category_attributes[:name] != ""
+      category = Category.find_by(name: category_attributes[:name], owner_id: category_attributes[:owner_id])
+      if !category
+        category = Category.create(name: category_attributes[:name], owner_id: category_attributes[:owner_id])
+        self.categories << category
+      end
+    end
   end
-  #
-  # def upcoming_events(num = nil)
-  #   if num
-  #     where("date >=? AND owner_id =?", Time.zone.today.beginning_of_day).order(date: :asc).limit(num)
-  #   else
-  #     where("date >=? AND users =?", Time.zone.today.beginning_of_day, 2).order(date: :asc)
-  #   end
-  # end
-  #
-  #
-  # def self.previous_events
-  #   where("date <?", Time.zone.today.beginning_of_day).order(date: :desc).limit(5)
-  # end
-  #
-  # def self.next_upcoming_event
-  #   self.upcoming_events.limit(1)
-  # end
-
 end

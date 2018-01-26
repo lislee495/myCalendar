@@ -8,6 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+
       <nav class="navbar navbar-expand-sm navbar-light bg-faded nav-color">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -54,9 +55,8 @@
     <div class="top"></div>
     <div id="main-container" class="container-fluid">
       <div class="row">
-
-          <div class="col-md-3 asides">
-            <% if upcoming_events?%>
+        <div class="col-md-3 asides">
+          <% if upcoming_events?%>
             <h5>Next Event:</h5>
             <ul>
               <li><%=link_to next_event.short_description, user_event_path(next_event)%>
@@ -75,35 +75,11 @@
             <%else%>
             <h3>Make a <a href="/user/event/new">new event!</a></h3>
             <% end%>
-          </div>
-
-        <div class="col-md-6">
-          <div class="content-div">
-            <%= yield %>
+        </div>
+        <div class="col-md-9">
+          <div class="table-cal">
+          <%= yield %>
           </div>
         </div>
-
-          <div class="col-md-3 asides">
-            <h5>Hello,
-              <%=current_user.email%></h5>
-            <%if any_friends?%>
-              <h3>Your Friends:</h3>
-              <ul>
-                <% current_user.friendships.each do |friend|%>
-                  <% user = User.find_by(id: friend.friend_id) %>
-                  <% if user%>
-                      <li><%=user.email%>
-                        <%=button_to "Delete", user_friendship_path(friend.id, friendship: {user_id: user.id}), class: "button", method: :delete, data: { confirm: 'Are you sure?' }%></li>
-                  <% end %>
-                  <%end %>
-                </ul>
-              <%end%>
-              <h5><%=link_to "Add Friends", new_user_friendship_path%></h5>
-            </div>
-
-
-        </div>
-      </div>
-
     </body>
   </html>

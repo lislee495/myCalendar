@@ -1,0 +1,28 @@
+.landing-page {
+  background-image: url("/assets/time-calendar-saturday-weekend-60032.jpeg");
+  background-size: cover;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.front-logo {
+}
+
+.sign-in {
+  width: 400px;
+  height: 400px;
+  background-color: #efc958;
+  padding: 30px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.button {
+  color: white;
+  background-color: #f23b58;
+  border-radius: 5px;
+  border-style: none;
+  padding: 1px 7px 2px
+}

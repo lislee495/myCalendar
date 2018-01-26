@@ -1,24 +1,36 @@
 
-class Calendar < Struct.new(:view, :date, :callback, :user)
+class Calendar < Struct.new(:view, :date, :callback, :user, :type)
   HEADER = %w[Sun Mon Tue Wed Thur Fri Sat]
+  DAY_HEADER = %w[Time Events]
   START_DAY = :sunday
 
   delegate :content_tag, to: :view
-  ###############################MONTH######################################
   def table
-    content_tag :table, class: "calendar table table-bordered table-striped" do
-      header + week_rows
+    if type == "day"
+      content_tag :table, class: "calendar table day-table" do
+        header + hour_rows
+      end
+    else
+      content_tag :table, class: "calendar table table-bordered week" do
+        header + rows
+      end
     end
   end
 
   def header
-    content_tag :tr do
-      HEADER.map { |day| content_tag :th, day }.join.html_safe
+    if type == "day"
+        content_tag :tr do
+          DAY_HEADER.map { |header| content_tag :th, header, class: "cal-header" }.join.html_safe
+        end
+    else
+      content_tag :tr do
+        HEADER.map { |day| content_tag :th, day, class: "cal-header" }.join.html_safe
+      end
     end
   end
 
-  def week_rows
-    weeks.map do |week|
+  def rows
+    dates.map do |week|
       content_tag :tr do
         week.map { |day| day_cell(day) }.join.html_safe
       end
@@ -31,52 +43,22 @@ class Calendar < Struct.new(:view, :date, :callback, :user)
 
   def day_classes(day)
     classes = []
+    if type == "week"
+      classes << "week-td"
+    end
     classes << make_day_class(day)
     classes << "today" if day == Date.today
-    classes << "not-month" if day.month != date.month
     classes.empty? ? nil : classes.join(" ")
   end
 
-  def weeks
-    first = date.beginning_of_month.beginning_of_week(START_DAY)
-    last = date.end_of_month.end_of_week(START_DAY)
-    (first..last).to_a.in_groups_of(7)
-  end
-  ########################WEEK############################
-
-  def week_table
-    content_tag :table, class: "calendar table table-bordered table-striped" do
-      header + day_rows
+  def dates
+    if type == "month"
+      first = date.beginning_of_month.beginning_of_week(START_DAY)
+      last = date.end_of_month.end_of_week(START_DAY)
+    elsif type == "week"
+      first = date.beginning_of_week(START_DAY)
+      last = date.end_of_week(START_DAY)
     end
-  end
-
-  def day_rows
-    content_tag :tr do
-      week.map { |day| week_day_cell(day) }.join.html_safe
-    end
-  end
-
-  def week_day_cell(day)
-    content_tag :td, view.capture(day, &callback), class: week_day_classes(day)
-  end
-
-  def week_day_classes(day)
-    classes = []
-    classes << make_day_class(day)
-    classes << "today" if day == Date.today
-    classes << "not-week" if week_day(day) != week_day(date)
-    classes.empty? ? nil : classes.join(" ")
-  end
-
-  def week
-    first = date.beginning_of_week(START_DAY)
-    last = date.end_of_week(START_DAY)
-    (first..last).to_a
-  end
-
-  def week_day(day)
-    first = date.beginning_of_week(START_DAY)
-    last = date.end_of_week(START_DAY)
     (first..last).to_a.in_groups_of(7)
   end
 
@@ -86,24 +68,7 @@ class Calendar < Struct.new(:view, :date, :callback, :user)
         return "table-warning"
     end
   end
-
-
-  #####################DAY###############################
-  DAY_HEADER = %w[Time Events]
-
-
-  def day_table
-    content_tag :table, class: "calendar table" do
-      day_header + hour_rows
-    end
-  end
-
-  def day_header
-    content_tag :tr do
-      DAY_HEADER.map { |header| content_tag :th, header }.join.html_safe
-    end
-  end
-
+######DAY########
   def hour_rows
     hours.map do |hour|
       content_tag :tr, class: make_class(hour[1]) do
@@ -138,7 +103,7 @@ class Calendar < Struct.new(:view, :date, :callback, :user)
     @events_by_date = user.events.group_by(&:date)
     if @events_by_date[date]
        @events_by_date[date].each do |event|
-      if hr >= event.start_time.strftime("%l").to_i && hr <= event.start_time.strftime("%l").to_i
+      if hr >= event.start_time.strftime("%k").to_i && hr <= event.end_time.strftime("%k").to_i
         return "table-warning"
       end
     end

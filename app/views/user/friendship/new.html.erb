@@ -1,6 +1,6 @@
 <%= form_for :friendship, :url => { :action => "create" } do |f| %>
 <%= f.label :email, "Find Using Their Email:" %>
-<%= f.collection_select :user_id, User.all, :id, :email, :include_blank => true%>
+<%= f.collection_select :user_id, User.where.not(id: current_user.id), :id, :email, :include_blank => true%>
 <%= f.submit "Add Friend"%>
 <% end %>
 

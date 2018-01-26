@@ -9,12 +9,12 @@
   </div>
 </div>
 <div class="row">
-    <%= week_calendar @date do |date| %>
+    <%= calendar(@date, "week") do |date| %>
       <%= date.day %>
       <% if @events_by_date[date] %>
     <ul>
       <% @events_by_date[date].each do |event| %>
-        <%= link_to event.short_description, user_event_path(event) %>
+        <%= link_to event.short_description, user_event_path(event), :class => "table-text"  %>
 
       <% end %>
     </ul>

@@ -15,4 +15,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require calendar
+//= require add_friends
 //= require_tree .

@@ -18,7 +18,7 @@
 <ul>
   <% if category_previous(@category)%>
   <% category_previous(@category).each do |event|%>
-  <li><%=event.short_description%> - <%=link_to "Show", user_event_path(event)%></li>
+  <li><%=link_to event.short_description, user_event_path(event)%></li>
   <% end %>
   <% end %>
 </ul>

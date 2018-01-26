@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body class="landing-page">
+    <!-- <%= image_tag('/assets/time-calendar-saturday-weekend-60032.jpeg', size: "200") %> -->
+
+    <div class="front-logo text-center">
+      <%= image_tag('/assets/my_cal.png', size: "200") %>
+    </div>
+    <div class="welcome text-center">
+      <h1>Welcome to MyCal!</h1>
+    </div>
+        <br>
+    <div class="sign-in text-center">
+      <%= yield %>
+    </div>
+  </body>
+  </html>

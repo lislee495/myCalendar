@@ -1,6 +1,6 @@
 <% if @event.errors.any? %>
     <div id="error_explanation">
-      <h3><%= pluralize(@event.errors.count, "error") %> prohibited this post from being saved:</h3>
+      <%= pluralize(@event.errors.count, "error") %> prohibited this post from being saved:
 
       <ul>
       <% @event.errors.full_messages.each do |msg| %>
@@ -10,24 +10,41 @@
     </div>
   <% end %>
 <div >
-
-
-<%= f.label :short_description %>
-<%= f.text_field :short_description %> <br>
+<div class="form-group">
+<%= f.label :short_description  %>
+<%= f.text_field :short_description, class:"form-control form-control-sm" %>
+ </div>
+ <div class="form-group ">
 <%= f.label :date %>
-<%= f.date_field :date%> <br>
+<%= f.date_field :date,  class:"form-control form-control-sm" %>
+ </div>
+ <div class="form-row">
+<div class="form-group col-md-6">
 <%= f.label :start_time %>
-<%= f.time_field :start_time %> <br>
+<%= f.time_field :start_time ,  class:"form-control form-control-sm" %>
+ </div>
+<div class="form-group col-md-6">
 <%= f.label :end_time %>
-<%= f.time_field :end_time %> <br>
+<%= f.time_field :end_time,  class:"form-control form-control-sm"  %>
+ </div>
+</div>
+<div class="form-group">
 <%= f.label :additional_info %>
-<%= f.text_field :additional_info %> <br>
+<%= f.text_field :additional_info,  class:"form-control form-control-sm"  %>
+ </div>
+<div class="form-group">
 <%= f.label :categories_attributes, 'Category'%>
 <%= f.fields_for :categories_attributes, @event.categories.build do |categories_fields| %>
-<%= categories_fields.text_field :name%>
+<%= categories_fields.text_field :name,  class:"form-control form-control-sm" %>
 <%= categories_fields.hidden_field(:owner_id, value: current_user.id)%>
-  <%end%> <br>
-<%= f.label :user_ids, "Add Your Friends" %> 
-<%= f.collection_select :user_ids, current_user.friends.all, :id, :email, :include_blank => true%> <br>
-<%= f.submit %>
+  <%end%>
+   </div>
+<div class="form-group">
+<%= f.label :user_ids, "Add Your Friends" %>
+<%= f.collection_select :user_ids, current_user.friends.all, :id, :email,  class:"form-control" , :include_blank => true%>
+</div>
+<div class="actions">
+<%= f.submit "Submit", class: 'button' %>
+</div>
+
 </div>

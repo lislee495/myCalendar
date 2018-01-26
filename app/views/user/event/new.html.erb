@@ -1,5 +1,7 @@
-<h1>Create a New Event</h1>
-
+<h1 class="text-center">Create a New Event</h1>
+<br>
+<div class="form-div form">
 <%= form_for :event, :url => { :action => "create" } do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
 <%end%>
+</div>

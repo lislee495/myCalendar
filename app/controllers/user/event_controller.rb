@@ -18,9 +18,20 @@ class User::EventController < ApplicationController
     end
   end
 
+  def index
+    @events = current_user.events
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
   def update
     if @event.owner == current_user
-      if @event.update(event_params)
+    @event.update(event_params)
+    if @event.save
         redirect_to user_event_path(@event)
       else
         render :edit
@@ -31,27 +42,18 @@ class User::EventController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def index
-    @events = current_user.events
-  end
-
-  def show
-  end
 
   def destroy
-    @event.destroy
+    @event.delete
     flash[:notice] = "Event deleted"
-    redirect_to user_event_path
+    redirect_to user_event_index_path
   end
 
   def unshare
     @user_event = EventUser.find_by(user_id: params[:event][:user_ids])
     @event = Event.find(@user_event.event_id)
     @user_event.delete
-    redirect_to user_event_path(@event)
+    redirect_to user_event_index_path
   end
 
   private

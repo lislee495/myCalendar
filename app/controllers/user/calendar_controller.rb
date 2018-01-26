@@ -1,6 +1,7 @@
 class User::CalendarController < ApplicationController
   before_action :authenticate_user!
   helper CalendarHelper
+  layout "calendar"
 
   def month
     @date = params[:date] ? Date.parse(params[:date]) : Date.today

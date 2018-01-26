@@ -8,13 +8,13 @@
   </div>
 </div>
 <div class="row">
-    <%= day_calendar @date do |hours| %>
+    <%= calendar(@date, "day") do |hours| %>
     <%if hours > 24%>
     <%=Time.at(hours).strftime("%l:%M %P")%>
     <%end%>
     <%if @events_by_date[@date]%>
        <%@events_by_date[@date].each do |event| %>
-      <% if hours == event.start_time.strftime("%l").to_i  %>
+      <% if hours == event.start_time.strftime("%k").to_i  %>
         <%=link_to event.short_description, user_event_path(event)%> <%=event.start_time.strftime("%l:%M %P")%> — <%=event.end_time.strftime("%l:%M %P")%>
       <% end  %>
      <%end %>
