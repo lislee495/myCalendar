@@ -1,16 +1,8 @@
-<%= form_for :friendship, :url => { :action => "create" } do |f| %>
+<%= form_for :friendship, :url => { :action => "create" }, class: "form" do |f| %>
 <%= f.label :email, "Find Using Their Email:" %>
-<%= f.collection_select :user_id, User.where.not(id: current_user.id), :id, :email, :include_blank => true%>
-<%= f.submit "Add Friend"%>
+<%= f.collection_select :user_id, User.all_except(current_user_friends), :id, :email, :include_blank => true%>
+<%= f.submit "Add Friend", class: "button"%>
 <% end %>
 
 <br>
-<h2>Users Who Added You</h2>
-
-<ul>
-  <% not_added_back.each do |user|%>
-  <li><%=user.email %></li>
-      <%= button_to('Add', { controller: "friendship", action: :create, friendship: {user_id: user.id} }, method: :post )%>
-  <% end %>
-
-</ul>
+<%= render partial: 'users_who_added_me' %>

@@ -6,7 +6,5 @@ class Friendship < ActiveRecord::Base
     where("friend_id = ?", user.id)
   end
 
-  def self.all_except(user)
-  where.not(id: user)
-  end
+  
 end

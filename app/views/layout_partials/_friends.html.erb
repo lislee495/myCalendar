@@ -1,0 +1,15 @@
+<h5>Hello,
+  <%=current_user.email%></h5>
+<%if any_friends?%>
+  <h3>Your Friends:</h3>
+  <ul>
+    <% current_user.friendships.each do |friend|%>
+      <% user = User.find_by(id: friend.friend_id) %>
+      <% if user%>
+          <li><%=user.email%>
+            <%=button_to "Delete", user_friendship_path(friend.id, friendship: {user_id: user.id}), class: "button", method: :delete, data: { confirm: 'Are you sure?' }%></li>
+      <% end %>
+      <%end %>
+    </ul>
+  <%end%>
+<h5><%=link_to "Add Friends", new_user_friendship_path%></h5>

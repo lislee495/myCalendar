@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :friendships
   has_many :friends, through: :friendships
   has_many :event_users
@@ -28,5 +26,9 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def self.all_except(friends)
+  where.not(id: friends)
   end
 end

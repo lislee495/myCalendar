@@ -1,28 +1,28 @@
 <h1><%=@category.name %></h1>
 
-<% if any_events?%>
-<h2>Your Next Event</h2>
-<ul>
-  <li><%=link_to category_next_event(@category).short_description, user_event_path(category_next_event(@category))%></li>
-
-</ul>
-<br>
-<h2>Your Upcoming Events</h2>
-<ul>
-  <% category_upcoming(@category).each do |event|%>
-  <li><%=link_to event.short_description, user_event_path(category_next_event(@category))%></li>
-  <% end %>
-</ul>
+<% if category_next_event(@category)%>
+  <h2>Your Next Event</h2>
+  <ul>
+    <li><%=link_to category_next_event(@category).short_description, user_event_path(category_next_event(@category))%></li>
+  </ul>
   <br>
-<h2>Your Previous Events</h2>
-<ul>
-  <% if category_previous(@category)%>
-  <% category_previous(@category).each do |event|%>
-  <li><%=link_to event.short_description, user_event_path(event)%></li>
-  <% end %>
-  <% end %>
-</ul>
+  <h2>Your Upcoming Events</h2>
+  <ul>
+    <% category_upcoming(@category).each do |event|%>
+      <li><%=link_to event.short_description, user_event_path(category_next_event(@category))%></li>
+    <% end %>
+  </ul>
+<% end %>
+<br>
+<% if category_previous(@category)%>
+  <h2>Your Previous Events</h2>
+  <ul>
+    <% category_previous(@category).each do |event|%>
+      <li><%=link_to event.short_description, user_event_path(event)%></li>
+    <% end %>
+  </ul>
 <% else %>
   <h2>No events to show!</h2>
-  <h3>Make a <%link_to "new event!", new_user_event_path%></h3>
+  <h3>Make a
+    <%=link_to "new event!", new_user_event_path%></h3>
 <% end %>

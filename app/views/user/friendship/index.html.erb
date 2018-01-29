@@ -10,14 +10,5 @@
   None found! <%=link_to "Add Friends", new_user_friendship_path%>
   <% end %>
 </ul>
-
 <br>
-<h2>Users Who Added You</h2>
-
-<ul>
-  <% not_added_back.each do |user|%>
-  <li><%=user.email %><%= button_to('Add', { controller: "friendship", action: :create, friendship: {user_id: user.id} }, method: :post )%>
-</li>
-  <% end %>
-
-</ul>
+<%= render partial: 'users_who_added_me' %>

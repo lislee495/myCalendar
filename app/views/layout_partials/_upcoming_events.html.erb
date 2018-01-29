@@ -1,0 +1,19 @@
+<h5>Next Event:</h5>
+<ul>
+  <li><%=link_to next_event.short_description, user_event_path(next_event)%>
+    -
+    <%=next_event.date.strftime("%B %e, %Y")%></li>
+</ul>
+<br>
+<h5>Upcoming Events:</h5>
+<ul>
+  <% upcoming.each do |event|%>
+    <li><%=link_to event.short_description, user_event_path(event)%>
+      -
+      <%=event.date.strftime("%B %e, %Y")%></li>
+  <% end%>
+</ul>
+<%else%>
+<h3>Make a
+  <a href="/user/event/new">new event!</a>
+</h3>

@@ -12,6 +12,14 @@ $ rails s
 ```
 Open localhost:3000 on browser.
 
+##Contributors Guide
+
+To contribute, please create an issue at https://github.com/snickers495/myCalendar/issues.
+
+##License
+
+This project has been licensed under the MIT open source license. Visit it at: https://github.com/snickers495/myCalendar/blob/master/LICENSE.md
+
 ##Credits
 
 Credits to:

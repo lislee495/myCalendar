@@ -11,5 +11,9 @@ module FriendshipHelper
     end
   end
 
+  def current_user_friends
+    not_friends = current_user.friends.map {|friend| friend.id}
+    not_friends << current_user.id
+  end
 
 end

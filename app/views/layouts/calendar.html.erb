@@ -8,73 +8,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-
-      <nav class="navbar navbar-expand-sm navbar-light bg-faded nav-color">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <%=link_to "MyCal", root_url, html_options = {class: "navbar-brand text-white logo"}%>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link text-white" href="/user/calendar/day">Today<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/user/calendar/week">Week<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/user/calendar/month">Month<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="/user/event/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Events
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/user/event/new">New Event</a>
-                <a class="dropdown-item" href="/user/event">All Events</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="/user/friendship" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Friends
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/user/friendship/new">New Friend</a>
-                <a class="dropdown-item" href="/user/friendship">All Friends</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="/user/category">Categories<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link text-white")%>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <%= render partial: 'layout_partials/navbar' %>
     <div class="top"></div>
     <div id="main-container" class="container-fluid">
       <div class="row">
         <div class="col-md-3 asides">
           <% if upcoming_events?%>
-            <h5>Next Event:</h5>
-            <ul>
-              <li><%=link_to next_event.short_description, user_event_path(next_event)%>
-                -
-                <%=next_event.date.strftime("%B %e, %Y")%></li>
-            </ul>
-            <br>
-            <h5>Upcoming Events:</h5>
-            <ul>
-              <% upcoming.each do |event|%>
-                <li><%=link_to event.short_description, user_event_path(event)%>
-                  -
-                  <%=event.date.strftime("%B %e, %Y")%></li>
-              <% end%>
-            </ul>
-            <%else%>
-            <h3>Make a <a href="/user/event/new">new event!</a></h3>
-            <% end%>
+          <%= render partial: "layout_partials/upcoming_events"%>
+          <% end%>
         </div>
         <div class="col-md-9">
           <div class="table-cal">
