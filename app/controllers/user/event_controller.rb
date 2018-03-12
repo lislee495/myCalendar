@@ -12,7 +12,7 @@ class User::EventController < ApplicationController
     @event.owner = current_user
     if @event.save
       current_user.events << @event
-      redirect_to user_event_path(@event)
+      render json: @event, status: 201
     else
       render :new
     end
@@ -25,13 +25,19 @@ class User::EventController < ApplicationController
   def show
   end
 
+  def unshare
+    @user_event = EventUser.find_by(user_id: params[:event][:user_ids], event_id: params[:event][:id])
+    @user_event.delete
+    redirect_to user_event_index_path
+  end
+
   def edit
   end
 
   def update
     if @event.owner == current_user
-    @event.update(event_params)
-    if @event.save
+      @event.update(event_params)
+      if @event.save
         redirect_to user_event_path(@event)
       else
         render :edit
@@ -46,13 +52,6 @@ class User::EventController < ApplicationController
   def destroy
     @event.delete
     flash[:notice] = "Event deleted"
-    redirect_to user_event_index_path
-  end
-
-  def unshare
-    @user_event = EventUser.find_by(user_id: params[:event][:user_ids])
-    @event = Event.find(@user_event.event_id)
-    @user_event.delete
     redirect_to user_event_index_path
   end
 

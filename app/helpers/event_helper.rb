@@ -4,20 +4,17 @@ module EventHelper
       events = current_user.events.select {|event| event.date.to_time + event.start_time.seconds_since_midnight.seconds >= Time.zone.now}
       events.sort_by &:date
     end
-
   end
 
   def previous
     if current_user
-      events = current_user.events.select {|event| event.date.to_time + event.start_time.seconds_since_midnight.seconds  < Time.zone.now}
+      events = current_user.events.select {|event| event.date.to_time + event.start_time.seconds_since_midnight.seconds < Time.zone.now}
       events.sort_by &:date
     end
   end
 
   def next_event
-    if current_user && upcoming
-      upcoming[0]
-    end
+    upcoming[0] if current_user && upcoming
   end
 
   def shared_with
@@ -27,5 +24,4 @@ module EventHelper
   def shared_with_me?
     shared_with.include?(current_user) ? true : false
   end
-
 end

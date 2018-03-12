@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :user do
     resources :event
     resources :friendship
-    resources :category, only: [:show, :index]
+    resources :category, only: [:show, :index, :destroy, :edit, :update]
   end
   authenticated :user do
     root to: 'user/event#new', as: :authenticated_root

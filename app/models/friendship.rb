@@ -5,6 +5,4 @@ class Friendship < ActiveRecord::Base
   def self.users_who_added(user)
     where("friend_id = ?", user.id)
   end
-
-  
 end

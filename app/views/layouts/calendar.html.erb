@@ -7,7 +7,8 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body>
+  <body> 
+    <%= render partial: 'layout_partials/flash'%>
     <%= render partial: 'layout_partials/navbar' %>
     <div class="top"></div>
     <div id="main-container" class="container-fluid">
@@ -15,6 +16,8 @@
         <div class="col-md-3 asides">
           <% if upcoming_events?%>
           <%= render partial: "layout_partials/upcoming_events"%>
+          <% else %>
+          <h3>Make a <%=link_to "new event!", new_user_event_path%>
           <% end%>
         </div>
         <div class="col-md-9">

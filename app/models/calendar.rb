@@ -1,4 +1,3 @@
-
 class Calendar < Struct.new(:view, :date, :callback, :user, :type)
   HEADER = %w[Sun Mon Tue Wed Thur Fri Sat]
   DAY_HEADER = %w[Time Events]

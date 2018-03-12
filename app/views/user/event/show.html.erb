@@ -13,7 +13,7 @@
   <% if !@event.users.select {|user| user.email != @event.owner.email}.empty?%>
   <li>Shared with: <%shared_with.each do |user|%>
       <%=user.email%> <% if @event.owner == current_user%>
-        <%=button_to "Unshare", user_event_unshare_path(event: {user_ids: user.id}), class: "button",  method: :post, data: { confirm: 'Are you sure?' }%>
+        <%=button_to "Unshare", user_event_unshare_path(event: {user_ids: user.id, id: @event.id}), class: "button",  method: :post, data: { confirm: 'Are you sure?' }%>
         <%end%>
       <%end%>
     </li>
@@ -22,7 +22,7 @@
 
 
 <% if shared_with_me? %>
-<%=button_to "Unshare Myself", user_event_unshare_path(event: {user_ids: current_user.id}), method: :post, data: { confirm: 'Are you sure?' }%>
+<%=button_to "Unshare Myself", user_event_unshare_path(event: {user_ids: current_user.id, id: @event.id}), class: 'button', method: :post, data: { confirm: 'Are you sure?' }%>
 <% end%>
 
 <span class="actions">

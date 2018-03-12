@@ -26,3 +26,6 @@
   <h3>Make a
     <%=link_to "new event!", new_user_event_path%></h3>
 <% end %>
+<%= button_to "Delete Category", user_category_path, class: 'button', method: :delete %>
+<br>
+<%= button_to "Edit Category", edit_user_category_path(@category), class: 'button', method: :get %>
