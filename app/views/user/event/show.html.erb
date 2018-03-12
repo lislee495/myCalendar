@@ -27,8 +27,26 @@
 
 <span class="actions">
   <% if @event.owner == current_user%>
+  <button class="js-next" data-id="<%=@event.id%>">Next Event</button>
   <%=button_to "Edit", edit_user_event_path(@event), class: "button", method: :get%>
   <br>
   <%=button_to "Delete", user_event_path, class: "button", method: :delete, data: {confirm: "Are you sure?"}%>
   <% end %>
+
 </span>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-next").on("click", function() {
+    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    $.get("/events/" + nextId + ".json", function(data) {
+      var event = data;
+      $(".productName").text(event["name"]);
+      $(".productPrice").text(event["price"]);
+      $(".productDescription").text(event["description"]);
+      $(".productInventory").text(event["inventory"]);
+      $(".js-next").attr("data-id", event["id"]);
+    });
+  });
+});
+</script>
