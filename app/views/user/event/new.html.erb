@@ -1,31 +1,20 @@
 <h1 class="text-center">Create a New Event</h1>
 <br>
 <div class="form-div form">
-<%= form_for :event, :url => { :action => "create" } do |f| %>
+<%= form_for :event, :url => { :action => "create" }, :html => { :id => "event_form" } do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
 <%end%>
 </div>
-
+<br/>
+<h2>Results</br>
+<hr/>
 <div id="eventResult">
   <h2 id="eventName"></h2>
   <p id="eventDate"></p>
+  <p id="eventStart"></p>
+  <p id="eventEnd"></p>
   <p id="eventDescription"></p>
-  <p id="eventCategory"></p>
 </div>
 
-<script type="text/javascript" charset="utf-8">
-  $(function () {
-    $('form').submit(function(event) {
-      event.preventDefault();
-      var values = $(this).serialize();
-      var posting = $.post('/events', values);
-      posting.done(function(data) {
-        var event = data;
-        $("#eventName").text(event["short_description"]);
-        $("#eventDate").text(event["date"]);
-        $("#eventDescription").text(event["additional_info"]);
-        $("#eventCategory").text(event["category"]);
-      });
-    });
-  });
-</script>
+
+

@@ -20,9 +20,18 @@ class User::EventController < ApplicationController
 
   def index
     @events = current_user.events
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @events, status: 200 }
+    end
   end
 
   def show
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @event, status: 200 }
+    end
   end
 
   def unshare
