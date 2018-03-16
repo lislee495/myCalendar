@@ -1,3 +1,27 @@
+function Event(attributes) {
+  this.date = attributes.date
+  this.start_time = attributes.start_time
+  this.end_time = attributes.end_time
+  this.short_description = attributes.short_description
+  this.additional_info = attributes.additional_info
+  this.id = attributes.id 
+  this.owner = attributes.user_ids.first
+}
+
+Event.prototype.formatDate = function(){
+  var newDate = new Date(this.date)
+  return newDate.toDateString() 
+}
+
+Event.prototype.formatStartTime = function(){
+  var newStart = new Date(this.start_time)
+  return newStart.toTimeString()
+}
+
+Event.prototype.formatEndTime = function(){
+  var endTime = new Date(this.end_time)
+  return endTime.toTimeString()
+}
 $(document).ready(function(){
     //list events on Events Index 
     if (document.location.pathname == "/user/event") {
@@ -23,7 +47,6 @@ $(document).ready(function(){
             var categoryLink = '<a href="' + '/user/category/' + category.id + '">'
             var button = `<button class="category-${category.id}" data-id="${category.id}" onclick="loadEvents(${category.id})">See Events</button>`
             var categoryInfo = `<ul><li class="cat-li-${category.id}">` + categoryLink + category.name + "</a>" + button + "</li></ul>"
-            // $(`.category-${category.id}`).on('click', `ul`, loadEvents)
             $('.categories-list').append(categoryInfo)
           })
         } else {
@@ -32,37 +55,26 @@ $(document).ready(function(){
       })
     }
     //show next event for Show Event 
-    $(".js-next").on("click", function() {
-        var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-        $.get("/user/event/" + nextId + ".json", function(data) {
-          var event = data;
-          $("#short_descriptor").text(event["short_descriptor"]);
-          $("#start_time").text(event["start_time"]);
-          $("#end_time").text(event["end_time"]);
-          $("#date").text(event["date"]);
-          $("#add_info").text(event["additional_info"]);
-          $("#owner").text(event["user_ids"].first);
-          $(".js-next").attr("data-id", nextId);
-          $(".js-prev").attr("data-id", nextId);
-          history.replaceState(null, null, 'http://localhost:3000/user/event/' + nextId);
+    $(".js-change").on("click", function() {
+        var newClass = $(this).attr("class").split(" ")[1]
+        if (newClass === "prev") {
+          var newId = parseInt($(".js-change").attr("data-id")) - 1;
+        } else {
+          var newId = parseInt($(".js-change").attr("data-id")) + 1;
+        }
+        $.get("/user/event/" + newId + ".json", function(data) {
+          var event = new Event(data)
+          $("#short_descriptor").text(event.short_description);
+          $("#start_time").text(event.formatStartTime());
+          $("#end_time").text(event.formatEndTime());
+          $("#date").text(event.formatDate());
+          $("#add_info").text(event.additional_info);
+          $("#owner").text(event.owner);
+          $(".next").attr("data-id", newId);
+          $(".prev").attr("data-id", newId);
+          history.replaceState(null, null, 'http://localhost:3000/user/event/' + newId);
         });
       });
-    //show prev event for Show Event 
-    $(".js-prev").on("click", function() {
-      var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
-      $.get("/user/event/" + prevId + ".json", function(data) {
-        var event = data;
-        $("#short_descriptor").text(event["short_descriptor"]);
-        $("#start_time").text(event["start_time"]);
-        $("#end_time").text(event["end_time"]);
-        $("#date").text(event.date);
-        $("#add_info").text(event["additional_info"]);
-        $("#owner").text(event["user_ids"].first);
-        $(".js-prev").attr("data-id", prevId);
-        $(".js-next").attr("data-id", prevId);
-        history.replaceState(null, null, 'http://localhost:3000/user/event/' + prevId);
-      });
-    });
 
     //adds event preview on Form page 
     $('#event_form').submit(function(event) {
@@ -70,11 +82,11 @@ $(document).ready(function(){
       var values = $(this).serialize();
       var posting = $.post('/user/event', values);
       posting.done(function(data) {
-        var event = data;
+        var event = new Event(data)
         $("#eventName").text(event["short_description"]);
-        $("#eventDate").text(event["date"]);
-        $("#eventStart").text(event["start_time"]);
-        $("#eventEnd").text(event["end_time"]);
+        $("#eventDate").text(event.formatDate());
+        $("#eventStart").text(event.formatStartTime());
+        $("#eventEnd").text(event.formatEndTime());
         $("#eventDescription").text(event["additional_info"]);
       });
     });

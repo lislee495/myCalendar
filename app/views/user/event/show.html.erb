@@ -5,19 +5,8 @@
   <li>Starts at: <div id="start_time"><%=@event.start_time.strftime("%l:%M%p") %></div></li>
   <li>Ends at: <div id="end_time"><%=@event.end_time.strftime("%l:%M%p") %></div></li>
   <li>Date: <div id="date"><%=@event.date.strftime("%B %e, %Y")%></div></li>
-  # <li>Categories: <div><%@event.categories.each do |category|%>
-  # <%= category.name %>
-  # <% end %></div></li>
   <li>Additional Information: <div id="add_info"><%=@event.additional_info%></div></li>
   <li>Created by: <div id="owner"><%=@event.owner.email%></div></li>
-  # <% if !@event.users.select {|user| user.email != @event.owner.email}.empty?%>
-  # <li>Shared with: <%shared_with.each do |user|%>
-  #   <div><%=user.email%></div> <% if @event.owner == current_user%>
-  #       <%=button_to "Unshare", user_event_unshare_path(event: {user_ids: user.id, id: @event.id}), class: "button",  method: :post, data: { confirm: 'Are you sure?' }%>
-  #       <%end%>
-  #     <%end%>
-  #   </li>
-  # <% end %>
 </ul>
 
 
@@ -27,8 +16,8 @@
 
 <span class="actions">
   <% if @event.owner == current_user%>
-  <button class="js-prev" data-id="<%=@event.id%>">Prev Event</button>
-  <button class="js-next" data-id="<%=@event.id%>">Next Event</button>
+  <button class="js-change prev" data-id="<%=@event.id%>">Prev Event</button>
+  <button class="js-change next" data-id="<%=@event.id%>">Next Event</button>
   <%=button_to "Edit", edit_user_event_path(@event), class: "button", method: :get%>
   <br>
   <%=button_to "Delete", user_event_path, class: "button", method: :delete, data: {confirm: "Are you sure?"}%>
