@@ -15,50 +15,16 @@ Event.prototype.formatDate = function(){
 
 Event.prototype.formatStartTime = function(){
   var newStart = new Date(this.start_time)
-  return newStart.toTimeString()
+  return newStart.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 }
 
 Event.prototype.formatEndTime = function(){
   var endTime = new Date(this.end_time)
-  return endTime.toTimeString()
+  return endTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 }
 
-$(document).ready(function(){
-    //list events on Events Index 
-    if (location.pathname === "/user/event") {
-      $.get('/user/event.json', (result)=>{
-        var events = result
-        if (events.length > 0) {
-          events.forEach(event => {
-            var eventLink = '<a href="' + '/user/event/' + event.id + '">'
-            var eventInfo = "<li>" + eventLink + event.short_description + "</a>" + "</li>"
-            $('#events-list').append(eventInfo)
-          })
-        } else {
-          $('#events-list').text("No events to show!")
-        }
-      })
-    }
-
-    if (document.location.pathname === "/user/category") {
-      $.get('/user/category.json', (result) => {
-        var categories = result
-        if (categories.length > 0) {
-          categories.forEach(category => {
-            var categoryLink = '<a href="' + '/user/category/' + category.id + '">'
-            var button = `<button class="category-${category.id} button" data-id="${category.id}" onclick="loadEvents(${category.id}); this.disabled=true;">See Events</button>`
-            var categoryInfo = `<ul><li class="cat-li-${category.id}">` + categoryLink + category.name + "</a>  " + button + "</li></ul>"
-            $('.categories-list').append(categoryInfo)
-          })
-        } else {
-          $('#events-list').text("No events to show!")
-        }
-      })
-    }
-    //show next event for Show Event 
-    //enables user to only see their events
-    //also updates the next/prev buttons dynamically 
-    $(".js-change").on("click", function() {
+$(document).on("turbolinks:load", function(){
+  $(".js-change").on("click", function() {
         var firstEventId;
         var lastEventId;
         var usersEventIds;
@@ -91,7 +57,6 @@ $(document).ready(function(){
               $(".prev").attr("data-id", newId).show();
             } 
             history.replaceState(null, null, 'http://localhost:3000/user/event/' + newId);
-    
         })
       })
     })
@@ -104,23 +69,17 @@ $(document).ready(function(){
       posting.done(function(data) {
         var event = new Event(data)
         $("#eventName").text("New event: " + event["short_description"]);
-        $("#eventDate").text(event.formatDate());
-        $("#eventStart").text(event.formatStartTime());
-        $("#eventEnd").text(event.formatEndTime());
-        $("#eventDescription").text(event["additional_info"]);
+        var info = `<p>Date: ${event.formatDate()}</p>` +
+        `<p>Start Time: ${event.formatStartTime()}</p>`+
+        `<p>End Time: ${event.formatEndTime()}</p>` +
+        `<p>Event Description: ${event.additional_info}</p>`
+        $("#event-info").append(info)
       });
     });
 })
+    // //show next event for Show Event 
+    // //enables user to only see their events
+    // //also updates the next/prev buttons dynamically 
+    
 
-function loadEvents(id) {
-    $.get("/user/category/" + id + ".json", function(data){
-      $(`.cat-li-${id}`).append(`<ul class="cat-ul-${id}" ></ul>`)
-      var catEvents = data.events;
-      console.log(catEvents)
-      catEvents.forEach(event => {
-        var eventLink = '<a href="' + '/user/event/' + event.id + '">'
-        var eventInfo = "<li>" + eventLink + event.short_description + "</a></li>"
-        $(`.cat-ul-${id}`).append(eventInfo)
-      })
-    })
-}
+
