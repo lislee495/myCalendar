@@ -42,7 +42,7 @@ $(document).on("turbolinks:load", function(){
           }
           $.get("/user/event/" + newId + ".json", function(data) {
             var event = new Event(data)
-            $("#short_descriptor").text(event.short_description);
+            $("#short_description").text(event.short_description);
             $("#start_time").text(event.formatStartTime());
             $("#end_time").text(event.formatEndTime());
             $("#date").text(event.formatDate());
@@ -65,6 +65,7 @@ $(document).on("turbolinks:load", function(){
     $('#event_form').submit(function(event) {
       event.preventDefault();
       var values = $(this).serialize();
+      console.log(values)
       var posting = $.post('/user/event', values);
       posting.done(function(data) {
         var event = new Event(data)
