@@ -1,34 +1,53 @@
-<h1>Event</h1>
+<h1 class="center">Event</h1>
 
-<ul>
-  <li>Short Description: <%=@event.short_description %></li>
-  <li>Starts at: <%=@event.start_time.strftime("%l:%M%p") %></li>
-  <li>Ends at: <%=@event.end_time.strftime("%l:%M%p") %></li>
-  <li>Date: <%=@event.date.strftime("%B %e, %Y")%></li>
-  <li>Categories: <%@event.categories.each do |category|%>
+<div class="events-show">
+<div class="label">
+<div class="items">Short Description:</div>
+<div class="items">Starts at:</div>
+<div class="items">Ends at:</div>
+<div class="items">Date:</div>
+<% if @event.categories.length > 0 %>
+<div class="items">Categories:</div>
+<% end %>
+<div class="items">More Information:</div>
+<div class="items">Created by:</div>
+<% if !@event.users.select {|user| user.email != @event.owner.email}.empty?%>
+<div class="items">Shared with:</div> 
+ <% end %>
+</div>
+
+
+<div class="info">
+<div class="items"><%=@event.short_description %></div>
+<div class="items"><%=@event.start_time.strftime("%l:%M%p") %></div>
+<div class="items"><%=@event.end_time.strftime("%l:%M%p") %></div>
+<div class="items"><%=@event.date.strftime("%B %e, %Y")%></div>
+<% if @event.categories.length > 0 %>
+<div class="items"><%@event.categories.each do |category|%>
   <%= category.name %>
-  <% end %></li>
-  <li>Additional Information: <%=@event.additional_info%></li>
-  <li>Created by: <%=@event.owner.email%></li>
+  <% end %></div>
+  <% end%>
+  <div class="items"><%=@event.additional_info%></div>
+  <div class="items"><%=@event.owner.email%></div>
   <% if !@event.users.select {|user| user.email != @event.owner.email}.empty?%>
-  <li>Shared with: <%shared_with.each do |user|%>
-      <%=user.email%> <% if @event.owner == current_user%>
-        <%=button_to "Unshare", user_event_unshare_path(event: {user_ids: user.id}), class: "button",  method: :post, data: { confirm: 'Are you sure?' }%>
+  <div class="items"><%shared_with.each do |user|%>
+      <%=user.email%>
+  <% if @event.owner == current_user%>
+  <span><%=button_to "Unshare", user_event_unshare_path(event: {user_ids: user.id}), class: "button",  method: :post, data: { confirm: 'Are you sure?' }%>
+  </span><%end%>
         <%end%>
-      <%end%>
-    </li>
-  <% end %>
-</ul>
+        <%end%>
+        </div>
+</div>
 
 
-<% if shared_with_me? %>
-<%=button_to "Unshare Myself", user_event_unshare_path(event: {user_ids: current_user.id}), method: :post, data: { confirm: 'Are you sure?' }%>
-<% end%>
-
-<span class="actions">
+</div>
+<div class="actions">
   <% if @event.owner == current_user%>
   <%=button_to "Edit", edit_user_event_path(@event), class: "button", method: :get%>
-  <br>
   <%=button_to "Delete", user_event_path, class: "button", method: :delete, data: {confirm: "Are you sure?"}%>
   <% end %>
-</span>
+  <% if shared_with_me? %>
+<%=button_to "Unshare Myself", user_event_unshare_path(event: {user_ids: current_user.id}), method: :post, data: { confirm: 'Are you sure?' }%>
+<% end%>
+</div>

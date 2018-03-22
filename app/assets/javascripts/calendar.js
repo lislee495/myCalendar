@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', ()=>{
   // Make table rows clickable
   $(".table td").on('click', function(event) {
     var target = $(event.target);

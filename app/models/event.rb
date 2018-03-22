@@ -17,8 +17,8 @@ class Event < ActiveRecord::Base
       category = Category.find_by(name: category_attributes[:name], owner_id: category_attributes[:owner_id])
       if !category
         category = Category.create(name: category_attributes[:name], owner_id: category_attributes[:owner_id])
-        self.categories << category
       end
+      self.categories << category
     end
   end
 end

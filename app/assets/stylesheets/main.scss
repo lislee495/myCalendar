@@ -1,3 +1,7 @@
+body {
+  font-family: 'Open Sans', 'Helvetica' !important;
+}
+
 .button {
   color: white;
   background-color: #f23b58;
@@ -46,10 +50,10 @@ h1, h2, h3, h4, h5 {
 }
 
 .content-div {
-  width: 350px;
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
-  text-align: left;
+  text-align: center;
 }
 input {
   border-radius: 4px;
@@ -63,4 +67,131 @@ input:hover {
 label {
   display: inline-block;
   margin-bottom: .5rem;
+}
+
+.col-md-3 {
+  max-width: 24.2% !important; 
+}
+
+.fb-login-button {
+  width: 12rem; 
+  background-color: #4267b2;
+  color: white; 
+  height: 32px;
+  padding: 0.2rem;
+  border-radius: 3px; 
+  font-family: Helvetica, Arial, sans-serif;
+  margin: auto; 
+}
+
+a:hover { text-decoration: none !important; }
+
+.events-show {
+  width: 100%; 
+  height: 100%;
+  border-radius: 5px;
+  border-color: #c9c6c3;
+  border-style: solid; 
+  border-width: 1px;
+  font-size: 1rem;
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-around;
+}
+
+div.label {
+  color: rgb(141, 140, 140);
+  font-size: 1rem;
+  display: flex; 
+  height: 100%; 
+  width: auto; 
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+div.info {
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex; 
+  height: 100%; 
+  width: auto; 
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: left;
+}
+
+.label div.items {
+  margin: 1rem;
+}
+
+.info div.items {
+  margin: 1rem;
+}
+
+h1.center {
+  text-align: center;
+}
+
+.actions {
+  margin-top: 2rem;
+  margin-right: auto; 
+  margin-left: auto;
+  width: 50%;
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between;
+}
+.actions form.button_to .button {
+  width: 6rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.date.event {
+   font-size: 0.7rem;
+   width: 100%; 
+   background-color: #79cfee;
+   padding: 0.4rem;
+   margin-bottom: 0.2rem;
+ }
+
+ .date.event a {
+  color: white; 
+}
+td {
+  padding: 0 !important;
+}
+
+.day {
+  margin: 0.4rem;
+}
+
+.day-table td {
+  padding: 0.5rem;
+}
+
+.day-cal {
+  padding: 0.4rem !important;
+}
+
+#error_explanation {
+  border-radius: 3px;
+  background-color: #f3b7c1;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+}
+ul.errors {
+  font-style: italic;
+}
+
+h5.welcome {
+ font-family: 'Open Sans' !important;
+ font-size: 1.2rem;
+}
+
+.form-div {
+  text-align: left; 
 }

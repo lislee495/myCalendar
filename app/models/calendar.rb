@@ -78,7 +78,7 @@ class Calendar < Struct.new(:view, :date, :callback, :user, :type)
   end
 
   def hour_cell(hour)
-    content_tag :td, view.capture(hour, &callback)
+    content_tag :td, view.capture(hour, &callback), class: 'day-cal'
   end
 
   def hours
@@ -104,7 +104,7 @@ class Calendar < Struct.new(:view, :date, :callback, :user, :type)
     if @events_by_date[date]
        @events_by_date[date].each do |event|
       if hr >= event.start_time.strftime("%k").to_i && hr <= event.end_time.strftime("%k").to_i
-        return "table-warning"
+        return "table-warning day-cal"
       end
     end
   end

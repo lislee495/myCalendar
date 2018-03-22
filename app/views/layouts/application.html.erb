@@ -2,15 +2,22 @@
 <html>
   <head>
     <title>App</title>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+
     <%= render partial: 'layout_partials/navbar' %>
     <div class="top"></div>
     <div id="main-container" class="container-fluid">
+      
       <div class="row">
 
           <div class="col-md-3 asides">
@@ -25,9 +32,9 @@
           </div>
         </div>
 
-          <div class="col-md-3 asides">
-            <%= render partial: "layout_partials/friends"%>
-            </div>
+        <div class="col-md-3 asides">
+          <%= render partial: "layout_partials/friends"%>
+        </div>
 
 
         </div>

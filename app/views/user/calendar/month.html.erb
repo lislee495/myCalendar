@@ -3,7 +3,7 @@
   <div class="col-md-12 text-center">
     <div class="well controls">
       <%= link_to "Previous", user_calendar_month_path(date: @date - 1.month)%>
-      <%= "#{@date.strftime("%B")} #{@date.year}" %>
+      <span style="font-weight:bold"><%= "#{@date.strftime("%B")} #{@date.year}" %></span>
       <%= link_to "Next", user_calendar_month_path(date: @date + 1.month)%>
 
     </div>
@@ -12,13 +12,18 @@
 <div class="row">
 
     <%= calendar(@date, "month") do |date| %>
+      <div class="day">
       <%= date.day %>
+      </div>
       <% if @events_by_date[date] %>
-    <ul>
+
       <% @events_by_date[date].each do |event| %>
-        <%= link_to event.short_description, user_event_path(event), :class => "table-text" %>
+        
+        <div class='date event' >
+        <%=link_to event.short_description.truncate(15), user_event_path(event)%>
+        </div>
       <% end %>
-    </ul>
+
   <% end %>
     <% end %>
 </div>
