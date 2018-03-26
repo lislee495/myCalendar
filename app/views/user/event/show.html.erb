@@ -18,8 +18,8 @@
   <% if @event.owner == current_user%>
   <button class="js-change prev show button" data-id="<%=@event.id%>">Prev Event</button>
   <button class="js-change next show button" data-id="<%=@event.id%>">Next Event</button>
-  <%=button_to "Edit", edit_user_event_path(@event), class: "show button", method: :get%>
+  <%=button_to "Edit", edit_user_event_path(@event), class: "show button", method: :get, form_class: "edit"%>
   <br>
-  <%=button_to "Delete", user_event_path, class: "show button", method: :delete, data: {confirm: "Are you sure?"}%>
+  <%=button_to "Delete", user_event_path, class: "show button", method: :delete, data: {confirm: "Are you sure?"}, form_class: "delete"%>
   <% end %>
 </span>

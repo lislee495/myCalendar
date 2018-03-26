@@ -57,6 +57,12 @@ $(document).on("turbolinks:load", function(){
               $(".prev").attr("data-id", newId).show();
             } 
             history.replaceState(null, null, 'http://localhost:3000/user/event/' + newId);
+            $(".edit").change(function() {
+              $(".edit").attr("action", "/user/event/" + newId + "/edit");
+            });
+            $(".delete").change(function() {
+              $(".delete").attr("action", "/user/event/" + newId);
+            });
         })
       })
     })
