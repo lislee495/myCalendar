@@ -11,9 +11,10 @@ body {
   flex-direction: column;
 }
 
-.sign-in {
+.sign-in,
+.login {
   width: 400px;
-  height: 400px;
+  height: auto;
   background-color: #efc958;
   padding: 30px;
   border-radius: 10px;
