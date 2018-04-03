@@ -1,14 +1,22 @@
+//loads events list  
 $(document).on("turbolinks:load", function(){
-
     if ($('#events-list').is(':visible')) {
-      console.log("true")
       $.get('/user/event.json', (result)=>{
         var events = result
         if (events.length > 0) {
-          events.forEach(event => {
-            var eventLink = '<a href="' + '/user/event/' + event.id + '">'
-            var eventInfo = "<li>" + eventLink + event.short_description + "</a>" + "</li>"
-            $('#events-list').append(eventInfo)
+          let sortedEvents = events.sort((a, b) => {
+            if (a.short_description < b.short_description) {
+              return -1
+            } else if (a.short_description > b.short_description) {
+              return 1
+            } else {
+              return 0
+            }
+          })
+          sortedEvents.forEach(event => {
+            let updatedEvent = new Event(event)
+            console.log(updatedEvent)
+            $('#events-list').append(updatedEvent.formatBulletPoint())
           })
         } else {
           $('#events-list').text("No events to show!")

@@ -1,29 +1,33 @@
 function Event(attributes) {
   this.date = attributes.date
-  this.start_time = attributes.start_time
-  this.end_time = attributes.end_time
-  this.short_description = attributes.short_description
-  this.additional_info = attributes.additional_info
+  this.startTime = attributes.start_time
+  this.endTime = attributes.end_time
+  this.shortDescription = attributes.short_description
+  this.additionalInfo = attributes.additional_info
   this.id = attributes.id 
   this.owner = attributes.user_ids.first
 }
-
 Event.prototype.formatDate = function(){
   var newDate = new Date(this.date)
   return newDate.toDateString() 
 }
 
 Event.prototype.formatStartTime = function(){
-  var newStart = new Date(this.start_time)
+  var newStart = new Date(this.startTime)
   return newStart.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 }
 
 Event.prototype.formatEndTime = function(){
-  var endTime = new Date(this.end_time)
+  var endTime = new Date(this.endTime)
   return endTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 }
 
+Event.prototype.formatBulletPoint = function() {
+  return `<li><a href="/user/event/${this.id}">${this.shortDescription}</a></li>`
+}
+
 $(document).on("turbolinks:load", function(){
+  //adds next and previous 
   $(".js-change").on("click", function() {
         var firstEventId;
         var lastEventId;
@@ -39,14 +43,14 @@ $(document).on("turbolinks:load", function(){
             newId = usersEventIds[eventInd - 1]
           } else {
             newId = usersEventIds[eventInd + 1]
-          }
+          } 
           $.get("/user/event/" + newId + ".json", function(data) {
             var event = new Event(data)
-            $("#short_description").text(event.short_description);
+            $("#short_description").text(event.shortDescription);
             $("#start_time").text(event.formatStartTime());
             $("#end_time").text(event.formatEndTime());
             $("#date").text(event.formatDate());
-            $("#add_info").text(event.additional_info);
+            $("#add_info").text(event.additionalInfo);
             $("#owner").text(event.owner);
             if (newId === lastEventId) {
               $(".next").hide()
@@ -56,13 +60,9 @@ $(document).on("turbolinks:load", function(){
               $(".next").attr("data-id", newId).show();
               $(".prev").attr("data-id", newId).show();
             } 
-            history.replaceState(null, null, 'http://localhost:3000/user/event/' + newId);
-            $(".edit").change(function() {
               $(".edit").attr("action", "/user/event/" + newId + "/edit");
-            });
-            $(".delete").change(function() {
               $(".delete").attr("action", "/user/event/" + newId);
-            });
+              history.replaceState(null, null, 'http://localhost:3000/user/event/' + newId);
         })
       })
     })
@@ -71,22 +71,15 @@ $(document).on("turbolinks:load", function(){
     $('#event_form').submit(function(event) {
       event.preventDefault();
       var values = $(this).serialize();
-      console.log(values)
       var posting = $.post('/user/event', values);
       posting.done(function(data) {
         var event = new Event(data)
-        $("#eventName").text("New event: " + event["short_description"]);
+        $("#eventName").text("New event: " + event["shortDescription"]);
         var info = `<p>Date: ${event.formatDate()}</p>` +
         `<p>Start Time: ${event.formatStartTime()}</p>`+
         `<p>End Time: ${event.formatEndTime()}</p>` +
-        `<p>Event Description: ${event.additional_info}</p>`
+        `<p>Event Description: ${event.additionalInfo}</p>`
         $("#event-info").append(info)
       });
     });
 })
-    // //show next event for Show Event 
-    // //enables user to only see their events
-    // //also updates the next/prev buttons dynamically 
-    
-
-

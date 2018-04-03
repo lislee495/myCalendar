@@ -1,3 +1,4 @@
+//loads categories list 
 $(document).on("turbolinks:load", function(){
     if ($('.categories-list').is(':visible')) {
     $.get('/user/category.json', (result) => {
@@ -14,7 +15,7 @@ $(document).on("turbolinks:load", function(){
       }
     })
 }})
-
+//loads events for each category 
 function loadEvents(id) {
     $.get("/user/category/" + id + ".json", function(data){
     $(`.cat-li-${id}`).append(`<ul class="cat-ul-${id}" ></ul>`)

@@ -18,7 +18,6 @@
 //= require turbolinks
 //= require calendar
 //= require new_jquery
-//= require add_friends
 //= require category_page
 //= require events_page
 //= require_tree .
