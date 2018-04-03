@@ -27,3 +27,9 @@ body {
   border-style: none;
   padding: 1px 7px 2px
 }
+
+form.new_user {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
