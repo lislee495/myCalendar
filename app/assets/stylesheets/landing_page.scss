@@ -28,8 +28,8 @@ body {
   padding: 1px 7px 2px
 }
 
-form.new_user .actions {
+.login {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: center !important;
 }
