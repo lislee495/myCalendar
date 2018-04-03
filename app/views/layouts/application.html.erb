@@ -24,7 +24,9 @@
           <div class="col-md-3 asides">
             <% if upcoming_events?%>
             <%= render partial: "layout_partials/upcoming_events"%>
-            <% end%>
+            <% else %>
+            <div>Make some new <a href="/user/event/new">events</a></div>
+            <%end%>
           </div>
 
         <div class="col-md-6">
