@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require calendar
+//= require category-page
 //= require_tree .
