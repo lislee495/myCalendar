@@ -1,7 +1,9 @@
 # README for My Cal
 
+_To watch a demo, visit this [video](https://youtu.be/EQizsq79bH4)_
+
 ## Description
-This site offers an intuitive, clean app for creating events, sharing them with friends, and viewing them on a calendar. First, users can sign up and quickly create an event. The app will organize the user's events by their relation to today's date and time, so it's easy to see the nearest events. The app also allows users to add other users as their friends, and see who's added them as a friend, so that person can be easily shared to an event. Once a user has been shared to an event, it'll appear in their upcoming events. Finally, the app offers dynamic calendars for day, week, and month views (using 's code as the basis), which will show and highlight the events that occur on each day and, in the case of the day calendar, each hour.
+This site offers an intuitive, clean app for creating events, sharing them with friends, and viewing them on a calendar. First, users can sign up and quickly create an event. The app will organize the user's events by their relation to today's date and time, so it's easy to see the nearest events. The app also allows users to add other users as their friends, and see who's added them as a friend, so that person can be easily shared to an event. Once a user has been shared to an event, it'll appear in their upcoming events. Finally, the app offers dynamic calendars for day, week, and month views, which will show and highlight the events that occur on each day and, in the case of the day calendar, each hour.
 
 ## Instructions
 
